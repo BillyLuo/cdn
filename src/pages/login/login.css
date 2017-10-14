@@ -1,0 +1,94 @@
+.login-in {
+    background: url('/img/login.png');
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+}
+.login-header {
+    width: 100%;
+    margin: 0 auto;
+    height: 58px;
+    padding: 13px 0;
+    background: rgba(255,255,255,0.7);
+}
+.login-header>div{
+    width: 70%;
+    margin: 0 auto;
+    min-width: 300px;
+}
+.login-header-left {
+    float: left;
+}
+.login-header-left img{
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.login-header-left span {
+    display: inline-block;
+    padding-left: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.login-header-right{
+    float: right;
+}
+.login-header-right a {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 30px;
+    font-size: 16px;
+    color: #6e6e6e;
+    margin: 0 10px;
+    text-decoration: none;
+}
+.login-header-right a:last-child{
+    color: #262930;
+}
+.login-main {
+    width: 25%;
+    max-width: 400px;
+    min-width: 300px;
+    margin: 0 auto;
+    padding-top: 10%;
+}
+.login-main h1{
+    text-align: center;
+    color: #fff;
+    font-size: 38px;
+    font-weight: 400;
+}
+.login-main h3{
+    text-align: center;
+    color: #f1f1f1;
+    font-size: 18px;
+    font-weight: 200;
+    padding: 28px 0 18px;
+}
+.login-input input{
+    height: 40px;
+    font-size: 14px;
+}
+#username {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+#password{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.login-remember-password{
+    padding: 20px 0;
+}
+.login-remember-password .ant-checkbox-wrapper{
+    vertical-align: middle;
+}
+.login-remember-password span {
+    display: inline-block;
+    line-height: 13px;
+    font-size: 14px;
+    color: #fff;
+}

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {Button} from 'antd';
+import './home.css';
 export default class Home extends React.Component<{history?:any},{}>{
     constructor(props:any){
         super(props);
@@ -12,7 +13,7 @@ export default class Home extends React.Component<{history?:any},{}>{
     }
     render () {
         return (
-            <div>
+            <div className="home">
                 这里是home页面
             </div>
         )
