@@ -45,7 +45,7 @@
     margin: 0 10px;
     text-decoration: none;
 }
-.login-header-right a:last-child{
+.login-header-right a.active{
     color: #262930;
 }
 .login-main {
@@ -91,4 +91,38 @@
     line-height: 13px;
     font-size: 14px;
     color: #fff;
+}
+/* 创建账号 */
+.regiser-title{
+    height: 42px;
+    background: url(/img/zcbj.png);
+    background-size: cover;
+    margin-bottom: 60px;
+}
+.scroll-input{
+    position: relative;
+    width: 380px;
+    height: 36px;
+    background: #eee;
+    border-radius: 2px;
+    text-align: center;
+    line-height: 36px;
+    margin-bottom:15px;
+}
+.scroll-block {
+    position: absolute;
+    width: 40px;
+    height: 36px;
+    top: 0px;
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #eee;
+}
+.scroll-block-bg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 36px;
+    width: 0;
+    background: rgb(46, 146, 252);
 }

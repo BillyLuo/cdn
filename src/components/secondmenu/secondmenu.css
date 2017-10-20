@@ -1,0 +1,93 @@
+.second-menu.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
+    background:#fff;
+    color:rgba(0,0,0,0.65);
+}
+.second-menu.ant-menu:not(.ant-menu-horizontal) .ant-menu-item::after{
+    border-right:0px;
+}
+.ant-menu.ant-menu-inline, .ant-menu-vertical{
+    border-right: 0px;
+}
+.second-menu.ant-menu .ant-menu-submenu > .ant-menu{
+    background: inherit;
+}
+.second-menu.ant-menu .ant-menu-item-active {
+    color:rgba(0,0,0,0.65);
+    background: #f7f7f7;
+    background-color:#f7f7f7;
+}
+.second-menu.ant-menu .ant-menu-submenu-active .ant-menu-submenu-title {
+    background:#f7f7f7;
+}
+.second-menu .ant-menu-submenu-active,.second-menu .ant-menu-submenu-active .ant-menu-submenu-title{
+    color:rgba(0,0,0,0.65);
+}
+/* 二级菜单title */
+.second-menu-title {
+    height: 60px;
+    line-height: 60px;
+    background:#e1e1e8;
+    color: #282828;
+    padding-left: 24px;
+    font-size: 16px;
+    font-weight:400;
+    display: block;
+}
+.second-menu-title-close{
+    background: #efeff1;
+    display: none;
+}
+/* 展开收拢菜单 */
+.second-menu-ctrl {
+    position:absolute;
+    top:43vh;
+    right:0px;
+    width:16px;
+    height:50px;
+    overflow: hidden;
+    z-index: 20;
+    /* background:#e1e1e1; */
+}
+.second-menu-ctrl-close{
+    position:absolute;
+    top:43vh;
+    right:0px;
+    width:16px;
+    height:50px;
+    overflow: hidden; 
+    z-index: 20;
+}
+.second-menu-ctrl:hover{
+    transform: scale(1.1);
+    right: 1px;
+}
+.second-menu-ctrl-close:hover{
+    transform: scale(1.1);
+}
+.second-menu-ctrl .second-menu-bg{
+    position: absolute;
+    top:0;
+    right: 0;
+    width:0;
+    height:0;
+    border-top: 22px solid transparent;
+    border-bottom: 24px solid transparent;
+    border-right: 28px solid #f7f7f7;
+    border-left: 0px;
+}
+.second-menu-ctrl-close .second-menu-bg{
+    position: absolute;
+    top:0;
+    left: 0;
+    width:0;
+    height:0;
+    border-top: 22px solid transparent;
+    border-bottom: 24px solid transparent;
+    border-left: 28px solid #f7f7f7;
+    border-right: 0px;
+}
+.second-menu-ctrl .second-menu-icon,.second-menu-ctrl-close .second-menu-icon{
+    position: absolute;
+    top:14px;
+    right: 0;
+}

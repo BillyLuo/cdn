@@ -29,11 +29,13 @@ export default class Header extends React.Component<{prop:any},{}>{
                             <Icon style={{fontSize:'24px'}} type="mail"/>
                         </Badge>
                     </div>
-                    <div className="logout-wrapper" style={{cursor:'default',color:'#fff',position:'relative',fontSize:'16px',float:'left',height:'50px',padding:'10px 24px'}}>
+                    <div className="logout-wrapper" style={{cursor:'default',color:'#fff',position:'relative',fontSize:'16px',float:'left',height:'44px',padding:'10px 24px'}}>
                     will
-                        <div style={{position:'absolute',top:'50px',left:'0px',width:'100%',transition:'all 0.3s'}}>
-                            <div onClick={this.logout.bind(this)} style={{border:'1px solid #eee',fontSize:'14px',width:'100%',padding:'10px',textAlign:'center'}}>
-                                登出
+                        <div style={{position:'absolute',top:'42px',left:'0px',width:'100%',transition:'all 0.3s'}}>
+                            <div style={{paddingTop:'6px'}}>
+                                <div onClick={this.logout.bind(this)} style={{border:'1px solid #eee',fontSize:'14px',background:'#fff',width:'100%',textAlign:'center'}}>
+                                    <div className="logout">登出</div>
+                                </div>
                             </div>
                         </div>
                     </div>

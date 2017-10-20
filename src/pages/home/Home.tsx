@@ -6,10 +6,9 @@ export default class Home extends React.Component<{history?:any},{}>{
         super(props);
     }
     componentDidMount() {
-        console.log(this);
-        if (this.props.history) {
-            this.props.history.push('/body');
-        }
+        // if (this.props.history) {
+        //     this.props.history.push('/body');
+        // }
     }
     render () {
         return (

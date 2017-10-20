@@ -2,6 +2,9 @@
 .App {
   /* text-align: center; */
 }
+html {
+  background: #f7f7f7;
+}
 .App .menu.ant-menu .ant-menu-item-selected{
   color:#fff;
   background: #2c9dfa;
@@ -25,8 +28,8 @@
 }
 .App-header img {
   width: 110px;
-  height: 45px;
-  padding:12px 20px;
+  height: 50px;
+  padding:16px 20px;
 }
 .App-intro {
   font-size: large;
@@ -38,11 +41,23 @@
 .logout-wrapper:hover div{
   display:block;
 }
-.logout-wrapper div:hover{
+.logout-wrapper .logout{
+  padding:10px 0;
+  height:40px;
+  background:#fff;
+}
+.logout-wrapper .logout:hover{
   background:#eee;
 }
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.clearfix:before,.clearfix:after {
+  content:'';
+  display:block;
+  height: 0;
+  clear: both;
 }

@@ -6,8 +6,12 @@ import { Menu, Icon, Button } from 'antd';
 import Header from './components/Header';
 import MainMenu from './components/menu/MainMenu';
 import Login from './pages/login/Login';
-import Body from './pages/body/Body';
+import FindPass from './pages/findpass/FindPass';
+import Register from './pages/register/register';
+import Body from './pages/main/index';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
+import axios from 'axios';
+window['axios'] = axios;
 
 class App extends React.Component<{}, {}> {
   click () {
@@ -23,12 +27,11 @@ class App extends React.Component<{}, {}> {
       <div className="App">
         <Router>
           <Switch>
-            <Route exact path="/" component={Login}></Route>
-            <Route path="/login" component={Login}></Route>
-            <Route path="/regist" component={Login}></Route>
-            <Route path="/findpass" component={Login}></Route>
-            <Route path="/body" component={Body}>
-            </Route>
+            <Route exact path="/" component={Login} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/findpass" component={FindPass} />
+            <Route path="/uc" component={Body} />
           </Switch>
         </Router>
       </div>

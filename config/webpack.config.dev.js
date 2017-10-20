@@ -118,12 +118,12 @@ module.exports = {
 
       // First, run the linter.
       // It's important to do this before Babel processes the JS.
-      {
-        test: /\.(ts|tsx)$/,
-        loader: require.resolve('tslint-loader'),
-        enforce: 'pre',
-        include: paths.appSrc,
-      },
+      // {
+      //   test: /\.(ts|tsx)$/,
+      //   loader: require.resolve('tslint-loader'),
+      //   enforce: 'pre',
+      //   include: paths.appSrc,
+      // },
       {
         test: /\.js$/,
         loader: require.resolve('source-map-loader'),
@@ -216,6 +216,9 @@ module.exports = {
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     // In development, this will be an empty string.
+    new webpack.ProvidePlugin({
+      axios: "axios"
+    }),
     new InterpolateHtmlPlugin(env.raw),
     // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
