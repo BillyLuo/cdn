@@ -3,10 +3,8 @@ import './../login/login.css';
 import LoginHead from './../login/loginHead';
 import { Form, Icon, Input, Button, Checkbox,Modal,message ,Popover} from 'antd';
 const FormItem = Form.Item;
-import axios from 'axios';
 var nodeForge = require('node-forge');
-axios.defaults.timeout = 10000;
-
+declare var axios;
 export default class Register extends React.Component<{history?:any},{}>{
     constructor(props:any) {
         super(props)
@@ -56,7 +54,7 @@ export default class Register extends React.Component<{history?:any},{}>{
                 let oEvent = ev || event;
                 let dis = oEvent['clientX'] - disX;
                 oDev.style.left = dis>=oWidth - iWidth? oWidth - iWidth +'px':dis +'px';
-                var scrollInput = document.getElementById('scroll-input');
+                // var scrollInput = document.getElementById('scroll-input');
                 scrollBg.style.width = dis>=oWidth - iWidth? oWidth - iWidth +'px':dis +'px';
                 if(dis<=0){
                     oDev.style.left = 0 + 'px';
@@ -73,8 +71,8 @@ export default class Register extends React.Component<{history?:any},{}>{
                 }
             }
             document.onmouseup = (ev)=>{
-                let oEvent = ev || event;
-                let dis = oEvent['clientX'] - disX;
+                // let oEvent = ev || event;
+                // let dis = oEvent['clientX'] - disX;
                 oDev.style.left = '0px';
                 let scrollBg = document.getElementById('scroll-bg');
                 if (scrollBg) {
@@ -173,8 +171,8 @@ export default class Register extends React.Component<{history?:any},{}>{
         let psdErr = this.state.psdErr;
         let psdRepeatErr = this.state.psdRepeatErr;
         let telErr = this.state.telErr;
-        let agree = this.state.agree;
-        let phoneValidated = this.state.phoneValidated;
+        // let agree = this.state.agree;
+        // let phoneValidated = this.state.phoneValidated;
         if (usernameErr || psdErr || psdRepeatErr || telErr) {
             return false;
         }else {

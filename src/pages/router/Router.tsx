@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Cloud from './../cloud/Cloud';
-import User from './../user/User';
+// import Cloud from './../cloud/Cloud';
+// import User from './../user/User';
 import BaseInfo from '../user/UserBaseInfo';
 import Certification from '../certification/Certification';
 import PersonCertification from '../certification/PersonCertification';
@@ -11,23 +11,23 @@ import SetPhone from '../safesettings/setphone';
 import SetMail from '../safesettings/setmail';
 import SecurityQuestion from '../safesettings/setsecurity';
 import Home from './../home/Home';
-import Chain from './../chain/Chain';
-import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
+// import Chain from './../chain/Chain';
+import {Route,Switch} from 'react-router-dom';
 let router = [
-    {path:'/uc',exact:true,component:Home},
-    {path:'/uc/home',exact:false,component:Home},
-    {path:'/uc/cdn',exact:false,component:Home},
-    {path:'/uc/user',exact:false,component:BaseInfo},
-    {path:'/uc/fee',exact:false,component:Home},
-    {path:'/uc/userbaseinfo',exact:false,component:BaseInfo},
-    {path:'/uc/certification',exact:false,component:Certification},
-    {path:'/uc/personcertification',exact:false,component:PersonCertification},
-    {path:'/uc/safesettings',exact:false,component:SafeSettings},
-    {path:'/uc/organizecertification',exact:false,component:OrganizeCertification},
-    {path:'/uc/setpassword',exact:false,component:SetPassword},
-    {path:'/uc/setphone',exact:false,component:SetPhone},
-    {path:'/uc/setmail',exact:false,component:SetMail},
-    {path:'/uc/setsecurity',exact:false,component:SecurityQuestion}
+    {path:'/cdn',exact:true,component:Home},
+    {path:'/cdn/home',exact:false,component:Home},
+    {path:'/cdn/cdn',exact:false,component:Home},
+    {path:'/cdn/user',exact:false,component:BaseInfo},
+    {path:'/cdn/fee',exact:false,component:Home},
+    {path:'/cdn/userbaseinfo',exact:false,component:BaseInfo},
+    {path:'/cdn/certification',exact:false,component:Certification},
+    {path:'/cdn/personcertification',exact:false,component:PersonCertification},
+    {path:'/cdn/safesettings',exact:false,component:SafeSettings},
+    {path:'/cdn/organizecertification',exact:false,component:OrganizeCertification},
+    {path:'/cdn/setpassword',exact:false,component:SetPassword},
+    {path:'/cdn/setphone',exact:false,component:SetPhone},
+    {path:'/cdn/setmail',exact:false,component:SetMail},
+    {path:'/cdn/setsecurity',exact:false,component:SecurityQuestion}
 ]
 export default class MainRouter extends React.Component<{},{}>{
     constructor(props:any){

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Input,Upload,Icon,message} from 'antd';
+import {Upload,Icon,message} from 'antd';
 
 export default class UploadImg extends React.Component<{
     getFile:any,instruction:any,btnText?:string,width?:(number|string),height?:(number|string)
@@ -28,7 +28,7 @@ export default class UploadImg extends React.Component<{
         let userId;
         let user = JSON.parse(sessionStorage.getItem('userinfo'));
         if (user) {
-            let userId = user.userId;
+            userId = user.userId;
         }
         let that = this;
         const props = {
@@ -65,7 +65,7 @@ export default class UploadImg extends React.Component<{
                             self.setState({
                                 src:src
                             });
-                            var data = self.handle();
+                            // var data = self.handle();
                         }
                         fileReader.readAsDataURL(file);
                     }else {

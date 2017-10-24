@@ -1,15 +1,12 @@
 import * as React from 'react';
 import './App.css';
-import 'antd/dist/antd.css';
+// import 'antd/dist/antd.css';
 import {message } from 'antd';
 import Login from './pages/login/Login';
 import FindPass from './pages/findpass/FindPass';
 import Register from './pages/register/register';
 import Body from './pages/main/index';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
-import axios from 'axios';
-window['axios'] = axios;
-
 class App extends React.Component<{}, {}> {
   click () {
     console.log('clicked')
@@ -28,7 +25,7 @@ class App extends React.Component<{}, {}> {
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/findpass" component={FindPass} />
-            <Route path="/uc" component={Body} />
+            <Route path="/cdn" component={Body} />
           </Switch>
         </Router>
       </div>

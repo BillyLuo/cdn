@@ -1,4 +1,3 @@
-import { Menu, Icon, Button } from 'antd';
 import * as React from 'react';
 import Header from './../../components/Header';
 import MainMenu from './../../components/menu/MainMenu';
@@ -20,18 +19,18 @@ export default class Body extends React.Component<{},{}>{
         console.log('this is body---pathname'+location.pathname,this.props);
         let pathname = location.pathname;
         let subMenu;
-        if (pathname=="/uc/userbaseinfo" 
-        || pathname == "/uc/certification" 
-        || pathname=="/uc/usersafesettings"
-        || pathname=="/uc/safesettings"
-        || pathname=="/uc/personcertification") {
+        if (pathname=="/cdn/userbaseinfo" 
+        || pathname == "/cdn/certification" 
+        || pathname=="/cdn/usersafesettings"
+        || pathname=="/cdn/safesettings"
+        || pathname=="/cdn/personcertification") {
             subMenu = {
                 pathname,
                 title:'账户管理',
                 nodes:[
-                    {path:'/uc/userbaseinfo',title:'基本资料',icon:''},
-                    {path:'/uc/certification',title:'实名认证',icon:'user'},
-                    {path:'/uc/safesettings',title:'安全设置',icon:'cloud-o'},
+                    {path:'/cdn/userbaseinfo',title:'基本资料',icon:''},
+                    {path:'/cdn/certification',title:'实名认证',icon:'user'},
+                    {path:'/cdn/safesettings',title:'安全设置',icon:'cloud-o'},
                 ]
             }
         }
@@ -113,7 +112,7 @@ export default class Body extends React.Component<{},{}>{
                     <MainMenu prop={this.props} onClickMenu={this.onClickMenu.bind(this)}/>
                     <div style={{float:'left',width:this.state.mainWidth}}>
                         <SecondMenu ref="sub-menu" prop={this.props} menuData={this.state.secondMenuData} onClickSecondMenu={this.onClickSecondMenu.bind(this)}/>
-                        <div className="main-content" style={{float:'left',width:this.state.contentWidth,background:'#fff',height:'calc(100vh - 50px)',overflowY:'scroll'}}>
+                        <div className="main-content" style={{float:'left',width:this.state.contentWidth,background:'#fff',height:'calc(100vh - 50px)',overflowY:'auto'}}>
                              <MainRouter />
                         </div>
                     </div>

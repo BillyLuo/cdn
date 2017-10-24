@@ -1,4 +1,9 @@
 {
   "presets": ["react-app"],
-  "plugins": [["import", { "libraryName": "antd", "style": false }]]
+  "plugins": [["import", { "libraryName": "antd", "style": false }],["transform-runtime",{
+    "helpers": false,
+    "polyfill": true,
+    "regenerator": true,
+    "moduleName": "babel-runtime"
+  }]]
 }

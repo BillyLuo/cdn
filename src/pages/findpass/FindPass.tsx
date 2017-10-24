@@ -1,9 +1,8 @@
 import * as React from 'react';
 import LoginHead from './../login/loginHead';
 import {Input,Button,message} from 'antd';
-import axios from 'axios';
 var nodeForge = require('node-forge');
-axios.defaults.timeout = 10000;
+declare var axios;
 
 export default class FindPass extends React.Component<{history?:any},{}>{
     constructor(props:any) {
@@ -314,7 +313,7 @@ export default class FindPass extends React.Component<{history?:any},{}>{
                 if (res.data.err_code == 1) {
                     message.success('密码修改成功');
                     if (this.props.history) {
-                        this.props.history.push('/uc');
+                        this.props.history.push('/cdn');
                     }
                 }else {
                     $this.setState({
@@ -445,7 +444,6 @@ export default class FindPass extends React.Component<{history?:any},{}>{
                 </div>
             )
         }else if (status == 3) {
-            let $this = this;
             return (
                 <div>
                     <div style={{width:'310px',margin:'0 auto',paddingTop:'100px'}}>

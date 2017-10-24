@@ -1,7 +1,7 @@
-
 .App {
   /* text-align: center; */
 }
+@import '~antd/dist/antd.css';
 html {
   background: #f7f7f7;
 }
@@ -34,11 +34,11 @@ html {
 .App-intro {
   font-size: large;
 }
-.logout-wrapper>div{
+.logout-wrapper>div>div{
   display:none;
   color:#444;
 }
-.logout-wrapper:hover>div{
+.logout-wrapper:hover>div>div{
   display:block;
 }
 .logout-wrapper .logout{

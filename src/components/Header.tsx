@@ -1,7 +1,6 @@
 import * as React from 'react';
 import './../App.css';
-import {message,Badge,Icon,Button } from 'antd';
-import {Router} from 'react-router';
+import {Badge,Icon } from 'antd';
 export default class Header extends React.Component<{prop:any},{}>{
     constructor(props:any) {
         super(props)
@@ -39,7 +38,9 @@ export default class Header extends React.Component<{prop:any},{}>{
                         </Badge>
                     </div>
                     <div className="logout-wrapper" style={{cursor:'default',color:'#fff',position:'relative',fontSize:'16px',float:'left',padding:'10px 24px'}}>
-                    {this.state.username}
+                        <div style={{maxWidth:150,overflow:'hidden',whiteSpace:'no-wrap',textOverflow:'ellipsis'}}>
+                            {this.state.username}
+                        </div>
                         <div style={{position:'absolute',zIndex:10,top:'42px',left:'0px',width:'100%',height:50,transition:'all 0.3s'}}>
                             <div style={{paddingTop:'6px'}}>
                                 <div onClick={this.logout.bind(this)} style={{border:'1px solid #eee',fontSize:'14px',background:'#fff',width:'100%',textAlign:'center'}}>

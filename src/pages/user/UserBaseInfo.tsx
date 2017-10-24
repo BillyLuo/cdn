@@ -2,8 +2,7 @@ import * as React from 'react';
 import Title from '../../components/title/Title';
 import {Input,Cascader,Button,message,Spin} from 'antd';
 import cityData from '../../data/city';
-import axios from 'axios';
-axios.defaults.timeout = 10000;
+declare var axios;
 
 export default class BaseInfo extends React.Component<{},{}>{
     state = {

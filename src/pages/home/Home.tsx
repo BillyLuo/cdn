@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {Button} from 'antd';
 import './home.css';
 export default class Home extends React.Component<{history?:any},{}>{
     constructor(props:any){

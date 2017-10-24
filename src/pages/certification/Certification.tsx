@@ -4,8 +4,7 @@ import {Radio,Button,message,Spin} from 'antd';
 const RadioGroup = Radio.Group;
 import OrganizeCertification from './OrganizeCertification';
 import PersonCertification from './PersonCertification';
-import axios from 'axios';
-axios.defaults.timeout = 10000;
+declare var axios;
 
 export default class Certification extends React.Component<{history?:any},{}>{
     state = {

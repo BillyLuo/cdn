@@ -1,10 +1,9 @@
 import * as React from 'react';
-import {Button,Input,Icon,Checkbox,Alert,Spin,Modal} from 'antd';
+import {Input,Icon,Checkbox,Alert,Spin,Modal} from 'antd';
 import './login.css';
 import LoginHead from './loginHead';
-import axios from 'axios';
-axios.defaults.timeout = 10000;
 var  nodeForge = require('node-forge');
+declare var axios;
 export default class Login extends React.Component<{history?:any},{}>{
     constructor(props:any){
         super(props);
@@ -97,7 +96,7 @@ export default class Login extends React.Component<{history?:any},{}>{
                         loginErr:false
                     })
                     if ($this.props.history) {
-                        $this.props.history.push('/uc');
+                        $this.props.history.push('/cdn');
                     }
                 }else {
                     let msg;

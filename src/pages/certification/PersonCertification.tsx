@@ -1,9 +1,8 @@
 import * as React from 'react';
 import Title from '../../components/title/Title';
-import {Input,Upload,Icon,message,Button,Spin} from 'antd';
+import {Input,Icon,message,Button,Spin} from 'antd';
 import UploadImg from './UploadImg';
-import axios from 'axios';
-axios.defaults.timeout = 10000;
+declare var axios;
 
 export default class PersonCertification extends React.Component<{},{
     realName:string,idNumber:string,imgUrl:string,textCode:string,getCodeText:string,waitting:boolean
@@ -244,9 +243,8 @@ export default class PersonCertification extends React.Component<{},{
         let userId;
         let user = JSON.parse(sessionStorage.getItem('userinfo'));
         if (user) {
-            let userId = user.userId;
+            userId = user.userId;
         }
-        let that = this;
         if (this.state.spinning) {
             return (
                 <div>

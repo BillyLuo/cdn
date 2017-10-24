@@ -1,9 +1,8 @@
 import * as React from 'react';
 import Title from '../../components/title/Title';
-import {Input,Upload,Icon,message,Button,Spin} from 'antd';
+import {Input,Icon,message,Button,Spin} from 'antd';
 import UploadImg from './UploadImg';
-import axios from 'axios';
-axios.defaults.timeout = 10000;
+declare var axios;
 
 export default class OrganizeCertification extends React.Component<{},{}>{
     
@@ -178,7 +177,7 @@ export default class OrganizeCertification extends React.Component<{},{}>{
         let webRecordNumber = this.state.webRecordNumber;
         let status = 2;
         let type = '';//认证类型
-        let idCardPhoto = this.state.imgUrl;
+        // let idCardPhoto = this.state.imgUrl;
         if (!enterpriseName){
             message.warn('请输入企业名称。');
             return;
@@ -267,11 +266,11 @@ export default class OrganizeCertification extends React.Component<{},{}>{
         
     }
     render () {
-        let that = this;
+        // let that = this;
         let userId;
         let user = JSON.parse(sessionStorage.getItem('userinfo'));
         if (user) {
-            let userId = user.userId;
+             userId = user.userId;
         }
         if (this.state.spinning){
             return (

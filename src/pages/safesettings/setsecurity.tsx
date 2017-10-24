@@ -1,8 +1,7 @@
 import * as React from 'react';
 import {Input,Button,message,Steps,Select} from 'antd';
 import Title from '../../components/title/Title';
-import axios from 'axios';
-axios.defaults.timeout = 10000;
+declare var axios;
 const Step = Steps.Step;
 const Option = Select.Option;
 export default class SecurityQuestion extends React.Component<{},{}>{
@@ -178,7 +177,7 @@ export default class SecurityQuestion extends React.Component<{},{}>{
         const data = {
             userId
         }
-        axios.put('/bizrest/bcbizuser/'+userId).then((res)=>{
+        axios.put('/bizrest/bcbizuser/'+userId,data).then((res)=>{
             if (res.status == 200){
                 if(res.data && res.data.retcode == -1){
                     $this.setState({
@@ -269,7 +268,7 @@ export default class SecurityQuestion extends React.Component<{},{}>{
             this.validate();
         }else if (this.state.step == 2) {
             if (this.props['history']){
-                this.props['history'].push('/uc/safesettings');
+                this.props['history'].push('/cdn/safesettings');
             }
         }
     }

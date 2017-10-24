@@ -1,10 +1,9 @@
 import * as React from 'react'
 import Title from '../../components/title/Title';
 import dateFormat from '../utils/DateFormat';
-import axios from 'axios';
 import {message} from 'antd';
-axios.defaults.timeout = 10000;
 import './css/safesettings.css';
+declare var axios;
 
 export default class SafeSettings extends React.Component<{},{}>{
     constructor(props:any){
@@ -22,7 +21,7 @@ export default class SafeSettings extends React.Component<{},{}>{
     }
     toCertify(){
         if(this.props['history']){
-            this.props['history'].push('/uc/certification');
+            this.props['history'].push('/cdn/certification');
         }
     }
     getUserInfo(){
@@ -35,7 +34,7 @@ export default class SafeSettings extends React.Component<{},{}>{
         axios.get('/bizrest/bcbizuser/'+userId).then(function (res) {
             if(res.status == 406 || res.status == 401){
                 alert('您的登录信息已超时，请重新登录！')
-                window.location.href='/uc/login/5'
+                window.location.href='/cdn/login/5'
                 return;
             }
             if(res.status == 200){
@@ -49,7 +48,6 @@ export default class SafeSettings extends React.Component<{},{}>{
         })
     }
     getCertificationInfo() {
-        let $this = this;
         const userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
         let userId;
         if (userinfo && userinfo.userId){
@@ -84,9 +82,9 @@ export default class SafeSettings extends React.Component<{},{}>{
     }
     modify(path?:string){
         if (this.props['history']){
-            this.props['history'].push('/uc/'+path);
+            this.props['history'].push('/cdn/'+path);
         }
-        // location.href='/uc/'+path;
+        // location.href='/cdn/'+path;
     }
     render () {
         let CertificationStatus;
@@ -140,7 +138,7 @@ export default class SafeSettings extends React.Component<{},{}>{
                                 <span style={{paddingRight:40}}>登录密码</span>安全性高的密码可以使账号更安全，建议您更换密码时，设置一个包含字码，符号或数字至少两项且长度超过6位的密码。
                             </div>
                             <div style={{width:'20%',float:'left',textAlign:'center'}}>
-                                <span style={{marginRight:20}}>已设置</span><a onClick={this.modify.bind(this,'setpassword')} href="javascript:'">修改</a>
+                                <span style={{marginRight:20}}>已设置</span><a onClick={this.modify.bind(this,'setpassword')} href="javascript:;">修改</a>
                             </div>
                         </li>
                         <li className='clearfix' style={{padding:'20px 10px',borderBottom:'1px solid #eee'}}>
@@ -148,7 +146,7 @@ export default class SafeSettings extends React.Component<{},{}>{
                                 <span style={{paddingRight:40}}>手机绑定</span>您已绑定手机（您的手机为安全手机，可以找回密码，但不能用于登录）。
                             </div>
                             <div style={{width:'20%',float:'left',textAlign:'center'}}>
-                                <span style={{marginRight:20}}>已设置</span><a onClick={this.modify.bind(this,'setphone')} href="javascript:'">修改</a>
+                                <span style={{marginRight:20}}>已设置</span><a onClick={this.modify.bind(this,'setphone')} href="javascript:;">修改</a>
                             </div>
                         </li>
                         <li className='clearfix' style={{padding:'20px 10px',borderBottom:'1px solid #eee'}}>
@@ -156,7 +154,7 @@ export default class SafeSettings extends React.Component<{},{}>{
                                 <span style={{paddingRight:40}}>备用邮箱</span>备用邮箱绑定后可以用来接受泛融链发送的备用系统、营销、服务通知。
                             </div>
                             <div style={{width:'20%',float:'left',textAlign:'center'}}>
-                                <span style={{marginRight:20}}>{this.state.userinfo['securityQuestion1']?"已设置":"未设置"}</span><a onClick={this.modify.bind(this,'setmail')} href="javascript:'">{this.state.userinfo['email']?"修改":"设置"}</a>
+                                <span style={{marginRight:20}}>{this.state.userinfo['securityQuestion1']?"已设置":"未设置"}</span><a onClick={this.modify.bind(this,'setmail')} href="javascript:;">{this.state.userinfo['email']?"修改":"设置"}</a>
                             </div>
                         </li>
                         <li className='clearfix' style={{padding:'20px 10px',borderBottom:'1px solid #eee'}}>
@@ -164,7 +162,7 @@ export default class SafeSettings extends React.Component<{},{}>{
                                 <span style={{paddingRight:40}}>密保问题</span>您找回密码的方式之一。建议您设置三个容易记住，且不容易被他人获取的问题及答案，更有效的保障您的密码安全。
                             </div>
                             <div style={{width:'20%',float:'left',textAlign:'center'}}>
-                                <span style={{marginRight:20}}>{this.state.userinfo['securityQuestion1']?"已设置":"未设置"}</span><a onClick={this.modify.bind(this,'setsecurity')} href="javascript:'">{this.state.userinfo['securityQuestion1']?"修改":"设置"}</a>
+                                <span style={{marginRight:20}}>{this.state.userinfo['securityQuestion1']?"已设置":"未设置"}</span><a onClick={this.modify.bind(this,'setsecurity')} href="javascript:;">{this.state.userinfo['securityQuestion1']?"修改":"设置"}</a>
                             </div>
                         </li>
                     </ul>

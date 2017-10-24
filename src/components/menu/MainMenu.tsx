@@ -1,7 +1,7 @@
 import * as React from 'react';
 // import '../menu.less';
 
-import {message,Badge,Menu,Icon,Button } from 'antd';
+import {Menu,Icon,Button } from 'antd';
 const SubMenu = Menu.SubMenu;
 export default class MainMenu extends React.Component<{prop?:any,onClickMenu?:any}, {collapsed:boolean}>{
     constructor(props:any) {
@@ -11,16 +11,20 @@ export default class MainMenu extends React.Component<{prop?:any,onClickMenu?:an
         }
     }
     menuNodes:any = [
-        {path:'/uc/home',title:'首页',icon:'home'},
-        {path:'/uc/cdn',title:'CDN',icon:'cloud-o',children:[
-            {path:'/uc/aboutcdn',title:'概况',icon:'tags'},
-            {path:'/uc/cdndomain',title:'CDN域名',icon:'rocket'},
-            {path:'/uc/adddomain',title:'添加域名',icon:'plus-circle'},
-            {path:'/uc/downloadlog',title:'日志下载',icon:'copy'}
+        {path:'/cdn/home',title:'首页',icon:'home'},
+        {path:'/cdn/cdn',title:'CDN',icon:'cloud-o',children:[
+            {path:'/cdn/aboutcdn',title:'概况',icon:'tags'},
+            {path:'/cdn/cdndomain',title:'CDN域名',icon:'rocket'},
+            {path:'/cdn/adddomain',title:'添加域名',icon:'plus-circle'},
+            {path:'/cdn/downloadlog',title:'日志下载',icon:'copy'}
         ]},
-        {path:'/uc/user',title:'用户中心',icon:'user'},        
-        {path:'/uc/fee',title:'费用中心',icon:'wallet',children:[
-            {path:'/uc/chain',title:'费用',icon:''}
+        {path:'/cdn/hijack',title:'反劫持',icon:'disconnect',children:[
+            {path:'/cdn/businessmanagement',title:'业务管理',icon:'appstore-o'},
+            {path:'/cdn/operatingdata',title:'运行数据',icon:'database'}
+        ]},
+        {path:'/cdn/user',title:'用户中心',icon:'user'},        
+        {path:'/cdn/fee',title:'费用中心',icon:'wallet',children:[
+            {path:'/cdn/chain',title:'费用',icon:''}
         ]}
     ];
     
@@ -62,28 +66,28 @@ export default class MainMenu extends React.Component<{prop?:any,onClickMenu?:an
         console.log('item--------',obj);
         if (obj && obj.key) {
             let key = obj.key;
-            if (key == '/uc/user') {
+            if (key == '/cdn/user') {
                 subMenuData = {
                     title:'账户管理',
                     nodes:[
-                        {path:'/uc/userbaseinfo',title:'基本资料',icon:''},
-                        {path:'/uc/certification',title:'实名认证',icon:'user'},
-                        {path:'/uc/safesettings',title:'安全设置',icon:'cloud-o'},
+                        {path:'/cdn/userbaseinfo',title:'基本资料',icon:''},
+                        {path:'/cdn/certification',title:'实名认证',icon:'user'},
+                        {path:'/cdn/safesettings',title:'安全设置',icon:'cloud-o'},
                     ]
                 };
-            }else if(key == '/uc/1-2'){
+            }else if(key == '/cdn/1-2'){
                 subMenuData = {
                     title:'次级菜单2',
                     nodes:[
-                        {path:'/uc/aa',title:'aaa',icon:'home'},
-                        {path:'/uc/bb',title:'bbb',icon:'user'},
-                        {path:'/uc/cc',title:'ccc',icon:'cloud-o',children:[
-                            {path:'/uc/dd',title:'dd',icon:'book'}
+                        {path:'/cdn/aa',title:'aaa',icon:'home'},
+                        {path:'/cdn/bb',title:'bbb',icon:'user'},
+                        {path:'/cdn/cc',title:'ccc',icon:'cloud-o',children:[
+                            {path:'/cdn/dd',title:'dd',icon:'book'}
                         ]},
-                        {path:'/uc/aeea',title:'ee',icon:'wallet',children:[
-                            {path:'/uc/fff',title:'ff',icon:'wallet'},
-                            {path:'/uc/xxx',title:'xx',icon:'some2'},
-                            {path:'/uc/yyy',title:'yy',icon:'some3'},
+                        {path:'/cdn/aeea',title:'ee',icon:'wallet',children:[
+                            {path:'/cdn/fff',title:'ff',icon:'wallet'},
+                            {path:'/cdn/xxx',title:'xx',icon:'some2'},
+                            {path:'/cdn/yyy',title:'yy',icon:'some3'},
                         ]}
                     ]
                 }

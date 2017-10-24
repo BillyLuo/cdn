@@ -2,22 +2,18 @@ let dateFormat = function(date,mask?:string) {
     
  let d = date;  
  if (!date) {
-    console.warn('没有写入date参数');
     return '';
  }
  if (!d.toUTCString) {
     d = new Date(date);
  } 
  if (Object.prototype.toString.call(d) != '[object Date]') {
-    console.warn('传入的不是Date对象');
     return '';
  } 
  if (d.toString() == 'Invalid Date') {
-    console.warn('日期不合格');
     return '';
  }
  if (!mask) {
-    console.warn('没有fomat的参数,默认yyyy-MM-dd HH:mm:ss');
     mask = 'yyyy-MM-dd HH:mm:ss';
  }   
  var zeroize = function (value, length) {        
@@ -92,7 +88,7 @@ let dateFormat = function(date,mask?:string) {
     
          // Return quoted strings with the surrounding quotes removed
     
-         default:    return $0.substr(1, $0.length - 2);        
+         default:    return $0.substr(1, $0.length - 2);      
     
      }        
     

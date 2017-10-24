@@ -1,9 +1,8 @@
 import * as React from 'react';
 import {Input,Button,message,Steps} from 'antd';
 import Title from '../../components/title/Title';
-import axios from 'axios';
 import nodeForge from 'node-forge';
-axios.defaults.timeout = 10000;
+declare var axios;
 const Step = Steps.Step;
 export default class SetPassword extends React.Component<{},{}>{
     constructor(props:any){
@@ -241,7 +240,7 @@ export default class SetPassword extends React.Component<{},{}>{
             this.submit();
         }else if (this.state.step == 2) {
             if (this.props['history']){
-                this.props['history'].push('/uc/safesettings');
+                this.props['history'].push('/cdn/safesettings');
             }
         }
     }

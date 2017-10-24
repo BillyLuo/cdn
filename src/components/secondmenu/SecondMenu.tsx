@@ -37,7 +37,7 @@ export default class SecondMenu extends React.Component<{prop?:any,onClickSecond
     }
     //解决强制刷新菜单丢失问题
     setMenuSelected () {
-        let $this = this,menuNodes:any;
+        let menuNodes:any;
         let selectedKey = this.props.menuData.pathname;
         if (this.props.menuData && this.props.menuData['nodes']) {
             menuNodes = this.props.menuData.nodes;
@@ -47,7 +47,7 @@ export default class SecondMenu extends React.Component<{prop?:any,onClickSecond
         for (var i = 0;i<menuNodes.length;i++) {
             if (menuNodes[i].children && menuNodes[i].children.length) {
                 let childrenNodes = menuNodes[i].children;
-                var openkey = menuNodes[i].path;
+                // var openkey = menuNodes[i].path;
                 for(var j = 0;j<childrenNodes.length;j++){
                     if (selectedKey==childrenNodes[j].path){
                         
@@ -94,7 +94,7 @@ export default class SecondMenu extends React.Component<{prop?:any,onClickSecond
         })
     }
     getMenu () {
-        let $this = this,menuNodes:any;
+        let menuNodes:any;
         let selectedKey;
         let defaultOpenKeys;
         let menuTitle;
@@ -112,7 +112,7 @@ export default class SecondMenu extends React.Component<{prop?:any,onClickSecond
         for (var i = 0;i<menuNodes.length;i++) {
             if (menuNodes[i].children && menuNodes[i].children.length) {
                 let childrenNodes = menuNodes[i].children;
-                var openkey = menuNodes[i].path;
+                // var openkey = menuNodes[i].path;
                 for(var j = 0;j<childrenNodes.length;j++){
                     if (selectedKey==childrenNodes[j].path){
                         defaultOpenKeys = menuNodes[i].path;
