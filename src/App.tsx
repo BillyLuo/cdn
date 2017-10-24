@@ -1,10 +1,7 @@
 import * as React from 'react';
 import './App.css';
 import 'antd/dist/antd.css';
-import {message,Badge } from 'antd';
-import { Menu, Icon, Button } from 'antd';
-import Header from './components/Header';
-import MainMenu from './components/menu/MainMenu';
+import {message } from 'antd';
 import Login from './pages/login/Login';
 import FindPass from './pages/findpass/FindPass';
 import Register from './pages/register/register';

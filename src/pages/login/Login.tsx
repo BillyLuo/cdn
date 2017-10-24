@@ -23,7 +23,6 @@ export default class Login extends React.Component<{history?:any},{}>{
         this.setState({
             rememberPass
         })
-        console.log(rememberPass);
         if (rememberPass) {
             localStorage.setItem('rememberPass','true');
             localStorage.setItem('username',this.state.username);
@@ -33,7 +32,6 @@ export default class Login extends React.Component<{history?:any},{}>{
         }
     }
     componentDidMount(){
-        console.log(this.state.rememberPass,'axios----------');
         if(localStorage.getItem('rememberPass')){
             this.setState({
                 username:localStorage.getItem('username')
@@ -78,25 +76,21 @@ export default class Login extends React.Component<{history?:any},{}>{
             "menu_type":1
         }
         axios.post("/bizs/lio/pblin.do?fh=LINLIO0000000J00&resp=bd",data).then((res)=>{
-            console.log(res);
             if (res.status == 401 || res.status == 406) {
                 Modal.warning({
                     title: '温馨提示',
                     content: '您的登录信息已超时，请重新登录。',
                     onOk() {
-                        console.log('登录超时');
                         if ($this.props.history) {
                             $this.props.history.push('/login');
                         }
                     },
                     onCancel() {
-                      console.log('Cancel');
                 },
                   });
                 return;
             }else if(res.status == 200) {
                 if (res.data && res.data.err_code == "1") {
-                    console.log('res',res);
                     sessionStorage.setItem('userinfo',JSON.stringify(res.data.user_info));
                     $this.setState({
                         loading:false,
@@ -120,7 +114,6 @@ export default class Login extends React.Component<{history?:any},{}>{
                 }
             }
         }).catch((err)=>{
-            console.warn('登录失败',err);
             let msg = '登录失败，请稍后重新尝试。';
             $this.setState({
                 loading:false,
@@ -150,7 +143,7 @@ export default class Login extends React.Component<{history?:any},{}>{
     render () {
         return (
             <div className="login-in">
-                <LoginHead history={this.props.history}/>
+                <LoginHead history={this.props.history} active="login"/>
                 <div className="login-main">
                     <h1>蜂巢链</h1>
                     <h3>管理您的服务</h3>

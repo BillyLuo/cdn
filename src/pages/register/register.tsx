@@ -33,7 +33,6 @@ export default class Register extends React.Component<{history?:any},{}>{
         registerErr:'',//注册错误提示语
     }
     componentDidMount () {
-        console.log('000000',this.props['form']);
         this.scrollBlock();
     }
     componentWillUnmount() {
@@ -304,9 +303,9 @@ export default class Register extends React.Component<{history?:any},{}>{
         let password = this.state.password;
         let confirm_password = this.state.passwordRepeat;
         let md = nodeForge.md.md5.create();
-        md.update(password)
-        md.update(confirm_password)
+        md.update(password);
         password = md.digest().toHex();
+        md.update(confirm_password);
         confirm_password =md.digest().toHex();
         let certification_tel = this.state.tel;
         let tel = this.state.tel;

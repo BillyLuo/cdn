@@ -95,8 +95,15 @@ export default class SecondMenu extends React.Component<{prop?:any,onClickSecond
     }
     getMenu () {
         let $this = this,menuNodes:any;
-        let selectedKey = this.props.menuData.pathname;
+        let selectedKey;
         let defaultOpenKeys;
+        let menuTitle;
+        if (this.props.menuData && this.props.menuData.pathname) {
+            selectedKey = this.props.menuData.pathname;
+        }
+        if (this.props.menuData && this.props.menuData.title) {
+            menuTitle = this.props.menuData.title;
+        }
         if (this.props.menuData && this.props.menuData['nodes'] && this.props.menuData['nodes'].length) {
             menuNodes = this.props.menuData.nodes;
         }else {
@@ -117,7 +124,7 @@ export default class SecondMenu extends React.Component<{prop?:any,onClickSecond
             return (
                 <div id="sub-menu" style={{width:this.state.collapsed?'16px':'170px',transition:'0.1s linear','overflow':'hidden',position:'relative', float:'left',height:'calc(100vh - 50px)',background:'#efeff1' }}>
                     <div className={this.state.collapsed?'second-menu-title-close':'second-menu-title'}>
-                        {this.state.subMenuTitle}
+                        {menuTitle}
                     </div>
                     <Menu className="second-menu"
                     defaultSelectedKeys={[selectedKey]}

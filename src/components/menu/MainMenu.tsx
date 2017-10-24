@@ -12,14 +12,15 @@ export default class MainMenu extends React.Component<{prop?:any,onClickMenu?:an
     }
     menuNodes:any = [
         {path:'/uc/home',title:'首页',icon:'home'},
-        {path:'/uc/user',title:'账户管理',icon:'user'},
-        {path:'/uc/cloud',title:'云服务',icon:'cloud-o',children:[
-            {path:'/uc/chain',title:'专属链账本',icon:'book'}
+        {path:'/uc/cdn',title:'CDN',icon:'cloud-o',children:[
+            {path:'/uc/aboutcdn',title:'概况',icon:'tags'},
+            {path:'/uc/cdndomain',title:'CDN域名',icon:'rocket'},
+            {path:'/uc/adddomain',title:'添加域名',icon:'plus-circle'},
+            {path:'/uc/downloadlog',title:'日志下载',icon:'copy'}
         ]},
+        {path:'/uc/user',title:'用户中心',icon:'user'},        
         {path:'/uc/fee',title:'费用中心',icon:'wallet',children:[
-            {path:'/uc/1-1',title:'1-1',icon:'wallet'},
-            {path:'/uc/1-2',title:'1-2',icon:'some2'},
-            {path:'/uc/1-3',title:'1-3',icon:'some3'},
+            {path:'/uc/chain',title:'费用',icon:''}
         ]}
     ];
     
@@ -61,21 +62,31 @@ export default class MainMenu extends React.Component<{prop?:any,onClickMenu?:an
         console.log('item--------',obj);
         if (obj && obj.key) {
             let key = obj.key;
-            if (key == '/uc/user' || key == '/uc/1-2') {
+            if (key == '/uc/user') {
                 subMenuData = {
+                    title:'账户管理',
                     nodes:[
-                        {path:'/uc/22',title:'111',icon:'home'},
-                        {path:'/uc/user',title:'222',icon:'user'},
-                        {path:'/uc/cloud',title:'333',icon:'cloud-o',children:[
-                            {path:'/uc/chain',title:'444',icon:'book'}
-                        ]},
-                        {path:'/uc/fee',title:'555',icon:'wallet',children:[
-                            {path:'5-1',title:'5-1',icon:'wallet'},
-                            {path:'5-2',title:'5-2',icon:'some2'},
-                            {path:'5-3',title:'5-3',icon:'some3'},
-                        ]}
+                        {path:'/uc/userbaseinfo',title:'基本资料',icon:''},
+                        {path:'/uc/certification',title:'实名认证',icon:'user'},
+                        {path:'/uc/safesettings',title:'安全设置',icon:'cloud-o'},
                     ]
                 };
+            }else if(key == '/uc/1-2'){
+                subMenuData = {
+                    title:'次级菜单2',
+                    nodes:[
+                        {path:'/uc/aa',title:'aaa',icon:'home'},
+                        {path:'/uc/bb',title:'bbb',icon:'user'},
+                        {path:'/uc/cc',title:'ccc',icon:'cloud-o',children:[
+                            {path:'/uc/dd',title:'dd',icon:'book'}
+                        ]},
+                        {path:'/uc/aeea',title:'ee',icon:'wallet',children:[
+                            {path:'/uc/fff',title:'ff',icon:'wallet'},
+                            {path:'/uc/xxx',title:'xx',icon:'some2'},
+                            {path:'/uc/yyy',title:'yy',icon:'some3'},
+                        ]}
+                    ]
+                }
             }
         }
         this.props.onClickMenu(collapsed,mainMenuWidth,subMenuData,MainMenuData);

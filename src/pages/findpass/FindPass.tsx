@@ -76,6 +76,12 @@ export default class FindPass extends React.Component<{history?:any},{}>{
     usernameBlur(){
         let $this = this;
         let user_name = this.state.username;
+        if (!user_name) {
+            this.setState({
+                usernameErr:'请输入用户名'
+            })   
+            return;
+        }
         axios.post('/bizs/biz/pbsct.do?fh=SCTBIZ0000000J00&resp=bd/',{
             user_name
         }).then((res)=>{
@@ -186,6 +192,15 @@ export default class FindPass extends React.Component<{history?:any},{}>{
     validateImgCode () {
         let $this = this;
         let code = this.state.imgCode;
+        let username = this.state.username;
+        if (!username) {
+            this.setState({
+                usernameErr:'请输入用户名'
+            })
+            return;
+        }else {
+            
+        }
         if (!code) {
             this.setState({
                 imgCodeErr:'请输入图片验证码'
@@ -406,12 +421,12 @@ export default class FindPass extends React.Component<{history?:any},{}>{
                         在此输入验证码
                     </div>
                     <div style={{width:'308px',margin:'10px auto'}}>
-                        <Input className="input_code" maxLength="1" id="str1" size="large" style={{display:'inline-block',width:'36px',height:'38px',marginRight:'15px',textAlign:'center'}}/>
-                        <Input className="input_code" maxLength="1" id="str2" size="large" style={{display:'inline-block',width:'36px',height:'38px',marginRight:'15px',textAlign:'center'}}/>
-                        <Input className="input_code" maxLength="1" id="str3" size="large" style={{display:'inline-block',width:'36px',height:'38px',marginRight:'15px',textAlign:'center'}}/>
-                        <Input className="input_code" maxLength="1" id="str4" size="large" style={{display:'inline-block',width:'36px',height:'38px',marginRight:'15px',textAlign:'center'}}/>
-                        <Input className="input_code" maxLength="1" id="str5" size="large" style={{display:'inline-block',width:'36px',height:'38px',marginRight:'15px',textAlign:'center'}}/>
-                        <Input className="input_code" maxLength="1" id="str6" size="large" style={{display:'inline-block',width:'36px',height:'38px',marginRight:'15px',textAlign:'center'}}/>
+                        <Input className="input_code"  id="str1" size="large" style={{display:'inline-block',width:'36px',height:'38px',marginRight:'15px',textAlign:'center'}}/>
+                        <Input className="input_code" id="str2" size="large" style={{display:'inline-block',width:'36px',height:'38px',marginRight:'15px',textAlign:'center'}}/>
+                        <Input className="input_code" id="str3" size="large" style={{display:'inline-block',width:'36px',height:'38px',marginRight:'15px',textAlign:'center'}}/>
+                        <Input className="input_code" id="str4" size="large" style={{display:'inline-block',width:'36px',height:'38px',marginRight:'15px',textAlign:'center'}}/>
+                        <Input className="input_code" id="str5" size="large" style={{display:'inline-block',width:'36px',height:'38px',marginRight:'15px',textAlign:'center'}}/>
+                        <Input className="input_code" id="str6" size="large" style={{display:'inline-block',width:'36px',height:'38px',marginRight:'15px',textAlign:'center'}}/>
                     </div>
                     <div style={{padding:'10px 0',textAlign:'center'}}>
                         <a onClick={this.getCode.bind(this)} href="javascript:;" style={{fontSize:'14px'}}>{this.state.getCode}</a>

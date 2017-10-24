@@ -1,12 +1,25 @@
 import * as React from 'react';
 
-export default class LoginHead extends React.Component<{history?:any},{}>{
+export default class LoginHead extends React.Component<{history?:any,active?:string},{}>{
     constructor(props:any){
         super(props)
     }
     state = {
         loginClass:'',
         createClass:'active'
+    }
+    componentDidMount(){
+        if (this.props.active == 'login'){
+            this.setState({
+                loginClass:'',
+                createClass:'active'
+            })
+        }else {
+            this.setState({
+                loginClass:'active',
+                createClass:''
+            })
+        }
     }
      //注册
      register() {
