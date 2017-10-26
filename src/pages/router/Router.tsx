@@ -1,6 +1,5 @@
 import * as React from 'react';
-// import Cloud from './../cloud/Cloud';
-// import User from './../user/User';
+import Home from './../home/Home';
 import BaseInfo from '../user/UserBaseInfo';
 import Certification from '../certification/Certification';
 import PersonCertification from '../certification/PersonCertification';
@@ -10,7 +9,9 @@ import SetPassword from '../safesettings/setpassword';
 import SetPhone from '../safesettings/setphone';
 import SetMail from '../safesettings/setmail';
 import SecurityQuestion from '../safesettings/setsecurity';
-import Home from './../home/Home';
+import BusinessManagement from '../businessmanagement/BusinessManagement';
+import OperatingData from '../operatingdata/OperatingData';
+import AddDomain from '../adddomain/AddDomain';
 // import Chain from './../chain/Chain';
 import {Route,Switch} from 'react-router-dom';
 let router = [
@@ -27,7 +28,10 @@ let router = [
     {path:'/cdn/setpassword',exact:false,component:SetPassword},
     {path:'/cdn/setphone',exact:false,component:SetPhone},
     {path:'/cdn/setmail',exact:false,component:SetMail},
-    {path:'/cdn/setsecurity',exact:false,component:SecurityQuestion}
+    {path:'/cdn/setsecurity',exact:false,component:SecurityQuestion},
+    {path:'/cdn/businessmanagement',exact:false,component:BusinessManagement},
+    {path:'/cdn/operatingdata',exact:false,component:OperatingData},
+    {path:'/cdn/adddomain',exact:false,component:AddDomain}
 ]
 export default class MainRouter extends React.Component<{},{}>{
     constructor(props:any){

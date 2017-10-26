@@ -15,7 +15,8 @@ export default class BaseInfo extends React.Component<{},{}>{
         tel:'',
         fax:'',
         disabled:true,
-        loading:true
+        loading:true,
+        btnVisible:true
     }
     componentWillMount () {
         let data = [];
@@ -112,8 +113,10 @@ export default class BaseInfo extends React.Component<{},{}>{
                 disabled:false,
                 btn:'提交'
             })
-        }else {
+        }else if(this.state.btn == '提交') {
             this.submitData();
+        }else {
+
         }
     }
     submitData () {
@@ -172,6 +175,9 @@ export default class BaseInfo extends React.Component<{},{}>{
             }
             if (res.status == 200 && res.data && res.data.retcode == -1) {
                 message.success('您的基本信息提交成功');
+                $this.setState({
+                    btn:'完成'
+                })
             }else {
                 message.error('信息提交失败，请稍后重试');
             }
@@ -227,7 +233,7 @@ export default class BaseInfo extends React.Component<{},{}>{
                                     <Input onChange={this.inputFax.bind(this)} disabled={this.state.disabled} value={this.state.fax} size="large" placeholder="传真"/>
                                 </div>
                                 <div>
-                                    <Button onClick={this.modify.bind(this)} type="primary" style={{width:'100%',marginTop:20}} size="large">{this.state.btn}</Button>
+                                    <Button onClick={this.modify.bind(this)} style={{width:'100%',marginTop:20,display:this.state.btn=='完成'?'none':'block'}} type="primary" size="large">{this.state.btn}</Button>
                                 </div>
                             </div>
                         </Spin>

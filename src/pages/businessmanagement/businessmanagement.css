@@ -1,0 +1,53 @@
+.business-management{
+    padding: 0 10px;
+}
+.business-header {
+    height: 40px;
+    border: 1px solid #ddd;
+    line-height: 40px;
+    background:#f7f7f7;
+    padding: 0 10px;
+}
+.business-header li {
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    float:left;
+    color: #2d3e50;
+}
+.business-header li span {
+    color: #f00;
+}
+.business-header li .icon-protect {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
+    background: url(/img/icon-protect.png) no-repeat;
+    background-size: contain;
+    margin-right: 8px;
+}
+/* 操作按钮 */
+.business-btn {
+    display: inline-block;
+    vertical-align: middle;
+    outline: none;
+    background: #f7f7f7;
+    height: 28px;
+    line-height: 28px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #2d3e50;
+    padding: 0 10px;
+    margin: 0 6px;
+}
+.business-btn:hover{
+    background: #f1f1f1;
+}
+.business-btn.active {
+    background: #333;
+    color: #fff;
+}
+.domain-management,.url-managemenrt {
+    margin: 24px 0 14px 0;
+}

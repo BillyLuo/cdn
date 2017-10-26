@@ -1,0 +1,7 @@
+.select-data{
+    padding: 24px 0;
+}
+.select-data li {
+    width: 240px;
+    float: left;
+}

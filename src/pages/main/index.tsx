@@ -51,10 +51,8 @@ export default class Body extends React.Component<{},{}>{
     }
     //主菜单回调事件
     onClickMenu(expaned:any,mainMenuWidth:any,subMenuData?:any,mainMenuData?:any){
-        console.log('onclickMainMenu',expaned,mainMenuWidth,subMenuData);
-        console.log('******',this.refs['sub-menu']);
         let nodes = [];
-        if (subMenuData && subMenuData.nodes) {
+        if (subMenuData && subMenuData.nodes && subMenuData.nodes.length) {
             nodes = subMenuData.nodes;
         }
         //如果没有第二栏菜单的话

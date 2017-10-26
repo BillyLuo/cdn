@@ -8,7 +8,7 @@ export default class Title extends React.Component<{text},{}>{
                     height:'16px',
                     position:'relative'
                 }}>
-                    <p style={{fontSize:'16px',textIndent:'12px',height:'16px',lineHeight:'16px'}}>{this.props.text}</p>
+                    <p style={{fontSize:14,textIndent:'12px',height:'16px',lineHeight:'16px'}}>{this.props.text}</p>
                 </div>
             </div>
         )
