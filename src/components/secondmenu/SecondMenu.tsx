@@ -127,7 +127,7 @@ export default class SecondMenu extends React.Component<{prop?:any,onClickSecond
                         {menuTitle}
                     </div>
                     <Menu className="second-menu"
-                    defaultSelectedKeys={[selectedKey]}
+                    selectedKeys={[selectedKey]}
                     mode="inline"
                     inlineCollapsed={this.state.collapsed}
                     defaultOpenKeys={[defaultOpenKeys]}

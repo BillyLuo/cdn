@@ -3,7 +3,7 @@ import Header from './../../components/Header';
 import MainMenu from './../../components/menu/MainMenu';
 import SecondMenu from '../../components/secondmenu/SecondMenu';
 import MainRouter from '../router/Router';
-export default class Body extends React.Component<{},{}>{
+export default class Body extends React.Component<{history?:any},{}>{
     constructor(props:any){
         super(props);
     }
@@ -16,10 +16,14 @@ export default class Body extends React.Component<{},{}>{
         secondMenuData:{}//二级菜单信息
     }
     componentDidMount() {
-        console.log('this is body---pathname'+location.pathname,this.props);
-        let pathname = location.pathname;
+        this.listen();
+        this.renderSubMenu(location.pathname);
+    }
+    renderSubMenu(pathname?:any){
+        pathname = pathname ? pathname : location.pathname;
         let subMenu;
-        if (pathname=="/cdn/userbaseinfo" 
+        if (pathname=="/cdn/userbaseinfo"
+        || pathname == '/cdn/user'
         || pathname == "/cdn/certification" 
         || pathname=="/cdn/usersafesettings"
         || pathname=="/cdn/safesettings"
@@ -42,6 +46,7 @@ export default class Body extends React.Component<{},{}>{
             })
         }else {
             this.setState({
+                secondMenuData:{},
                 contentWidth:'100%'
             })
         }
@@ -100,6 +105,20 @@ export default class Body extends React.Component<{},{}>{
         this.setState({
             secondMenuWidth,
             contentWidth:'calc(100% - '+secondMenuWidth + 'px )'
+        })
+    }
+    listen(){
+        let $this = this;
+        this.props.history.listen((location)=>{
+            let pathname = location.pathname;
+            $this.renderSubMenu(pathname);
+        })
+    }
+    //如果没有二级菜单的话
+    noSecondMenu(){
+        this.setState({
+            secondMenuData:[],
+            contentWidth:'100%'
         })
     }
     render () {

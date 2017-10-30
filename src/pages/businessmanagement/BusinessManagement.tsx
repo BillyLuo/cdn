@@ -13,31 +13,80 @@ export default class BusinessManagement extends React.Component<{history?:any},{
         urlData:[],
         domainData:[],
         addUrlVisible:false,//url弹窗是否可见
-        url:''
+        url:'',
+        domainPageNo:1,
+        domainPageSize:5,
+        domainTotalCount:0,
+        urlPageNo:1,
+        urlPageSize:5,
+        urlTotalCount:0,
+        domainLoading:true,//加载表格时的动画
+        urlLoading:true
     }
     componentDidMount(){
-        this.initDomainData();
-        this.initUrlData();
+        console.log(this,this.props);
+        this.initDomainData(1,5,);
+        this.initUrlData(1,5);
     }
-    initDomainData(){
+    initDomainData(pageNo?:number,pageSize?:number){
+        console.log(pageNo,pageSize);
         let $this = this;
-        axios.get('/bizs/acn/pbqdm.do').then((res)=>{
+        let userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
+        let userId;
+        if (userinfo && userinfo.userId){
+            userId = userinfo.userId;
+        }else {
+            alert('未找到用户信息，请重新登录。');
+            this.props.history.push('/login');
+            return;
+        }
+        let data = {
+            userId,
+            pageNo,
+            pageSize
+        }
+        axios.post('/bizs/acn/pbqdm.do',data).then((res)=>{
             console.log(res);
+            $this.setState({
+                domainLoading:false
+            })
             if (res.status == 200 ) {
                 if (res.data && res.data.errorCode == '000000'){
-                    if (res.data.domains && res.data.domains.length){
+                    if (res.data.domains && res.data.domains){
+                        $this.setState({
+                            selectedDomains:[],
+                            domainTotalCount:res.data.totalCount
+                        })
                         $this.setDomainData(res.data.domains);
+                    }else {
+                        if ($this.state.domainPageNo >1){
+                            $this.initDomainData(1,$this.state.domainPageSize);
+                        }else{
+                            $this.setDomainData([]);
+                        }
                     }
+                }else {
+                    message.error('网络请求错误，请稍后重试。');   
                 }
             }else {
                 message.error('网络请求错误，请稍后重试。');
             }
         }).catch((err)=>{
-            console.log('errrrr',err);
+            $this.setState({
+                domainLoading:false
+            })
+            console.log('errrrr',typeof err,err);
+            let errMsg = err.toString();
+            if(errMsg.match('401') || errMsg.match('406')){
+                alert('您的登录信息已超时，请稍后重试。');
+                location.href="/login";
+                return;
+            }
             message.error('网络请求错误，请稍后重试。');
         });
     }
-    initUrlData(){
+    initUrlData(pageNo?:number,pageSize?:number){
+        console.log(pageNo,pageSize);
         let $this = this;
         let userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
         let userId;
@@ -46,25 +95,45 @@ export default class BusinessManagement extends React.Component<{history?:any},{
         }else {
             return;
         }
-        let urlText = '';
-        let pageNo = 1;
-        let pageSize = 4;
         axios.post('/bizs/acn/pbqul.do',{
             userId,
-            urlText,
             pageNo,
             pageSize
         }).then((res)=>{
-            console.log('urls------',res);
-            if (res.data && res.data.urls.length){
-                let urlData = res.data.urls;
-                $this.setState({
-                    selectedUrls:[],
-                    urlData
-                })
+            console.log('urls------',res.data);
+            $this.setState({
+                urlLoading:false
+            })
+            if (res.data && res.data.errorCode == '000000'){
+                if(res.data.urls){
+                    let urlData = res.data.urls;
+                    $this.setState({
+                        urlData,
+                        urlTotalCount:res.data.totalCount
+                    })
+                }else {
+                    if ($this.state.urlPageNo>1){
+                        $this.initUrlData(1,$this.state.urlPageSize);
+                    }else {
+                        $this.setState({
+                            urlData:[]
+                        })
+                    }
+                }
+            }else{
+                message.error('获取url错误，请稍后重试');   
             }
         }).catch((err)=>{
+            $this.setState({
+                urlLoading:false
+            })
             console.log(err,'查询失败');
+            let errMsg = err.toString();
+            if (errMsg.match('401' || errMsg.match('406'))){
+                alert('您的登录信息已超时，请重新登录');
+                this.props.history.push('/login');
+                return;
+            }
             message.error('请求url数据出现错误，请稍后重试。');
         })
     }
@@ -98,25 +167,55 @@ export default class BusinessManagement extends React.Component<{history?:any},{
         })
     }
     onAddConfirm () {
+        let urlText = this.state.url.trim();
+        let regUrl = /^(https?:\/\/)?\w+(\.\w+)+/g;
+        if(!urlText){
+            message.error('请输入url');
+            return;
+        }else if (!regUrl.test(urlText)){
+            message.error('请输入合格的url');
+            return;
+        }
         this.setState({
             url:'',
             addUrlVisible:false
         })
         this.addUrlText();
     }
+    onAddUrlPress(e:any){
+        if(e.keyCode == 13) {
+            this.addUrlText();
+        }
+    }
     addUrlText(){
         let $this = this;
         let urlText = this.state.url.trim();
+        let regUrl = /^(https?:\/\/)?\w+(\.\w+)+/g;
         if(!urlText){
             message.error('请输入url');
             return;
+        }else if (!regUrl.test(urlText)){
+            message.error('请输入合格的url');
+            return;
         }
+        this.setState({
+            url:'',
+            addUrlVisible:false
+        })
         axios.post('/bizs/acn/pbnul.do',{urlText}).then((res)=>{
             if (res.data && res.data.errorCode == '000000'){
-                $this.initUrlData();
+                message.success('url添加成功');
+                let pageNo = $this.state.urlPageNo;
+                let pageSize = $this.state.urlPageSize;
+                $this.initUrlData(pageNo,pageSize);
+            }else if(res.data && res.data.errorDesc){
+                message.error(res.daa.errorDesc);
+            }else {
+                message.error('url添加失败，请稍后重试。');
             }
         }).catch((err)=>{
             console.log(err,'添加url失败');
+            message.error('url添加失败，请稍后重试。');
         })
     }
     onAddCancel () {
@@ -130,10 +229,22 @@ export default class BusinessManagement extends React.Component<{history?:any},{
             addUrlVisible:true
         })
     }
-    //选择行
+    //选择变化的行
     onSelectDomainChange(keys,rows){
+        console.log('keys',keys)
         this.setState({
             selectedDomains:keys
+        })
+    }
+    onSelectDomain(item,checked,selected){
+        let arr = [];
+        if (selected && selected.length){
+            for(let i = 0;i<selected.length;i++){
+                arr.push(selected[i].key)
+            }
+        }
+        this.setState({
+            selectedDomains:arr
         })
     }
     onSelectDomainAll(selected,rows) {
@@ -149,32 +260,55 @@ export default class BusinessManagement extends React.Component<{history?:any},{
             selectedDomains:keys
         })
     }
+    //分页
+    onDomainPageChange(page:number,pageSize:number){
+        this.setState({
+            domainPageNo:page?page:1,
+            domainPageSize:pageSize?pageSize:5
+        })
+        this.initDomainData(page,pageSize);
+    }
+    onUrlPageChange(pageNo?:number,pageSize?:number){
+        pageNo = pageNo?pageNo:1;
+        pageSize = pageSize?pageSize:5;
+        this.setState({
+            urlPageNo:pageNo?pageNo:1,
+            urlPageSize:pageSize?pageSize:5
+        })
+        this.initUrlData(pageNo,pageSize);
+    }
+    onDomainPageSizeChange(pageNo?:number,pageSize?:number){
+        this.setState({
+            domainPageNo:pageNo?pageNo:1,
+            domainPageSize:pageSize?pageSize:5
+        })
+        this.initDomainData(pageNo,pageSize);
+    }
+    onUrlPageSizeChange(pageNo?:number,pageSize?:number){
+        this.setState({
+            urlPageNo:pageNo?pageNo:1,
+            urlPageSize:pageSize?pageSize:5
+        })
+        this.initUrlData(pageNo,pageSize);
+    }
+    //删除域名
     doDeleteDomain(){
         let $this = this;
         let selectedDomains = this.state.selectedDomains;
-        let domainData = this.state.domainData;
+        // let domainData = this.state.domainData;
         
         let ids = selectedDomains.join(',');
         axios.post('/bizs/acn/pbddm.do',{domainIds:ids}).then((res)=>{
             console.log(res);
             if(res.data && res.data.errorCode=='000000'){
-                for (let i = 0,len = selectedDomains.length;i<len;i++){
-                    let data = [];
-                    for(let j = 0;j<domainData.length;j++){
-                        $this.setState({
-                            domainData:data,
-                            selectedDomains:[]
-                        })
-                        if (domainData[j] && selectedDomains[i] == domainData[j].key){
-                            domainData[j] = null;
-                            for (let i = 0;i<domainData.length;i++){
-                                if(domainData[i]){
-                                    data.push(domainData[i])
-                                }
-                            }
-                        }
-                    }
-                }
+                let total = this.state.domainTotalCount - selectedDomains.length;
+                $this.setState({
+                    selectedDomains:[],
+                    domainTotalCount:total
+                })
+                let pageNo = this.state.domainPageNo;
+                let pageSize = this.state.domainPageSize;
+                $this.initDomainData(pageNo,pageSize);
                 message.success('删除成功。');
             }else {
                 message.error('删除失败，请稍后重试。');
@@ -202,7 +336,9 @@ export default class BusinessManagement extends React.Component<{history?:any},{
             }
         })
     }
-    getDomainData () {
+    getDomainData (pageNo?:number,pageSize?:number,TotalCount?:number) {
+        let domainPageSize = this.state.domainPageSize;
+        let domainTotalCount = this.state.domainTotalCount;
         const columns = [{
             title: '域名',
             dataIndex: 'domainName',
@@ -249,20 +385,26 @@ export default class BusinessManagement extends React.Component<{history?:any},{
           let $this = this;
           let rowSelection = {
             selectedDomains,
-            onChange: this.onSelectDomainChange.bind($this),
+            onSelect:this.onSelectDomain.bind($this),
+            // onChange: this.onSelectDomainChange.bind($this),
             onSelectAll:this.onSelectDomainAll.bind($this)
           }
           let pagination={ //分页
-            total: this.state.domainData.length, //数据总数量
-            pageSize: 5,  //显示几条一页
+            // total: this.state.domainData.length,
+            total:domainTotalCount,
+            pageSizeOptions:['5','10','15','20'],
+            onChange:$this.onDomainPageChange.bind(this),
+            onShowSizeChange:$this.onDomainPageSizeChange.bind(this),
+            pageSize:domainPageSize,  //显示几条一页
             showSizeChanger: true,  //是否显示可以设置几条一页的选项
             showQuickJumper:true,
             showTotal:()=> {  //设置显示一共几条数据
-                return '共 ' + this.state.domainData.length + ' 条数据'; 
+                return '共 ' + domainTotalCount + ' 条数据'; 
             }
         }
+        let domainLoading = this.state.domainLoading;
         return (
-            <Table rowSelection={rowSelection}columns={columns} dataSource={data} pagination={pagination}/>
+            <Table rowSelection={rowSelection}columns={columns} loading={domainLoading} dataSource={data} pagination={pagination}/>
         )
     }
     //渲染urlData
@@ -314,24 +456,86 @@ export default class BusinessManagement extends React.Component<{history?:any},{
             onChange: this.onSelectUrlChange.bind($this),
             onSelectAll:this.onSelectUrlAll.bind($this)
           }
+          let pageSize = this.state.urlPageSize;
           let pagination={ //分页
-            total: this.state.urlData.length, //数据总数量
-            pageSize: 5,  //显示几条一页
+            total: this.state.urlTotalCount, //数据总数量
+            pageSizeOptions:['5','10','15','20'],
+            pageSize: pageSize?pageSize:5,  //显示几条一页
+            onShowSizeChange:$this.onUrlPageSizeChange.bind(this),
+            onChange:$this.onUrlPageChange.bind(this),
             showSizeChanger: true,  //是否显示可以设置几条一页的选项
             showQuickJumper:true,
             showTotal:()=> {  //设置显示一共几条数据
-                return '共 ' + this.state.urlData.length + ' 条数据'; 
+                return '共 ' + this.state.urlTotalCount + ' 条数据'; 
             }
         }
+        let urlLoading = this.state.urlLoading;
         return (
-            <Table rowSelection={rowSelection}columns={columns} dataSource={data} pagination={pagination}/>
+            <Table rowSelection={rowSelection} loading={urlLoading} columns={columns} dataSource={data} pagination={pagination}/>
         )
     }
     onSelectUrlChange(keys,rows){
-        console.log(keys,rows)
+        console.log(keys,rows);
+        this.setState({
+            selectedUrls:keys
+        })
     }
     onSelectUrlAll(selected,rows){
         console.log(selected,rows);
+    }
+    deleteUrl(){
+        let urlIds = this.state.selectedUrls;
+        if (!urlIds.length){
+            message.warn('请选择要删除的数据行。');
+            return;
+        }
+        let $this = this;
+        Modal.confirm({
+            title:'删除URL',
+            content:'您确定要删除选中的URL么？',
+            okText:'确定',
+            cancelText:'取消',
+            onOk:()=>{
+                $this.doDeleteUrl();
+            }
+        })
+    }
+    doDeleteUrl(){
+        let $this = this;
+        let urlIds = this.state.selectedUrls;
+        if (urlIds.length==1){
+            axios.post('/bizs/acn/pbdul.do',{urlId:urlIds[0]}).then((res)=>{
+                if (res.status == 200) {
+                    if (res.data && res.data.errorCode == '000000'){
+                        message.success('url删除成功。');
+                        let pageNo = $this.state.urlPageNo;
+                        let pageSize = $this.state.urlPageSize;
+                        $this.initUrlData(pageNo,pageSize);
+                    }else {
+                        message.error('url删除失败。');
+                    }
+                }
+            }).catch((err)=>{
+                message.error('url删除失败，请稍后重试。')
+            })
+        }else if (urlIds.length >1){
+            for (let i = 0;i<urlIds.length;i++){
+                axios.post('/bizs/acn/pbdul.do',{urlId:urlIds[i]}).then((res)=>{
+                    if (res.status == 200) {
+                        if (res.data && res.data.errorCode == '000000'){
+                            // message.success('url删除成功。');
+                            let pageNo = $this.state.urlPageNo;
+                            let pageSize = $this.state.urlPageSize;
+                            $this.initUrlData(pageNo,pageSize);
+                        }else {
+                            // message.error('url删除失败。');
+                        }
+                    }
+                }).catch((err)=>{
+                    console.log('删除url失败，失败详情',err)
+                })
+            }
+        }
     }
     configureDomain(){
         let domainIds = this.state.selectedDomains;
@@ -360,13 +564,13 @@ export default class BusinessManagement extends React.Component<{history?:any},{
     }
     render () {
         return (
-            <div className="business-management">
+            <div className="business-management" style={{paddingBottom:30}}>
                 <Title text="业务管理" />
                 <div style={{paddingTop:38}}>
                     <ul className="clearfix business-header">
-                        <li><i className="icon-protect"></i>受保护域名：<span>3</span></li>
+                        <li><i className="icon-protect"></i>受保护域名：<span>{this.state.domainTotalCount}</span></li>
                         <li>累计保护次数：<span>3</span></li>
-                        <li><i className="icon-protect"></i>受保护URL：<span>3</span></li>
+                        <li><i className="icon-protect"></i>受保护URL：<span>{this.state.urlTotalCount}</span></li>
                         <li>累计保护次数：<span>3</span></li>
                     </ul>
                 </div>
@@ -381,14 +585,14 @@ export default class BusinessManagement extends React.Component<{history?:any},{
                 </div>
                 <div className="url-managemenrt">
                     <button className="business-btn active" onClick={this.addUrl.bind(this)}>添加URL</button>
-                    <button className="business-btn">删除URL</button>
+                    <button className="business-btn" onClick={this.deleteUrl.bind(this)}>删除URL</button>
                     <button className="business-btn">导入</button>
                 </div>
                 <div>
                     {this.getUrlData()}
                 </div>
                 <Modal title="添加URL" visible={this.state.addUrlVisible} maskClosable={true} onOk={this.onAddConfirm.bind(this)} onCancel={this.onAddCancel.bind(this)}>
-                    <input className="ant-input ant-input-large" value={this.state.url} onChange={this.inputUrl.bind(this)} />
+                    <input className="ant-input ant-input-large" value={this.state.url} onKeyUp={this.onAddUrlPress.bind(this)} onChange={this.inputUrl.bind(this)} />
                 </Modal>
             </div>
         )

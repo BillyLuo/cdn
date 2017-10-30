@@ -39,6 +39,9 @@
     color: #fff;
     margin-left: 15px;
 }
+.delete-dns-item button:hover{
+    background: #f1f1f1;
+}
 .delete-dns-item button{
     background: #f7f7f7;
     border: 1px solid #ddd;

@@ -47,6 +47,12 @@ export default class AddDomain extends React.Component<{history?:any,location?:a
                     }
                 }
             }).catch((err)=>{
+                let errMsg = err.toString();
+                if(errMsg.match('401') || errMsg.match('406')){
+                    alert('您的登录信息已超时，请稍后重试。');
+                    location.href="/login";
+                    return;
+                }
                 console.log('errrrr',err);
                 message.error('网络请求错误，请稍后重试。');
             });
@@ -64,7 +70,7 @@ export default class AddDomain extends React.Component<{history?:any,location?:a
             if (!domainValid){
                 return;
             }else {
-                let domainName = $this.state.domainName;
+                let domainName = $this.state.domainName.trim();
                 console.log(domainName,ipArr);
                 if (ipArr && ipArr.length){
                     let address = '';
@@ -79,12 +85,19 @@ export default class AddDomain extends React.Component<{history?:any,location?:a
                         if (res.data && res.data.errorCode == '000000'){
                             message.success('添加域名成功.');
                             $this.props.history.push('/cdn/businessmanagement')
+                            return;
                         }else if (res.data && res.data.errorCode == '000002') {
                             message.warn(res.data.errorDesc+',请重新输入域名。');
                         }else{
                             message.error('添加域名失败，请稍后重试');
                         }
-                    }).catch((res)=>{
+                    }).catch((err)=>{
+                        let errMsg = err.toString();
+                        if(errMsg.match('401') || errMsg.match('406')){
+                            alert('您的登录信息已超时，请稍后重试。');
+                            location.href="/login";
+                            return;
+                        }
                         message.error('添加域名失败，请稍后重试');
                     })
                 }else{
@@ -94,10 +107,19 @@ export default class AddDomain extends React.Component<{history?:any,location?:a
                         if(res.data && res.data.errorCode == '000000'){
                             message.success('添加域名成功');
                             $this.props.history.push('/cdn/businessmanagement')
+                            return;
+                        }if(res.data && res.data.errorCode == '000002'){
+                            message.warn(res.data.errorDesc+',请重新输入域名。');
                         }else{
-                            message.error('添加域名失败，请稍后重试');
+                            message.error('----添加域名失败，请稍后重试');
                         }
-                    }).catch((res)=>{
+                    }).catch((err)=>{
+                        let errMsg = err.toString();
+                        if(errMsg.match('401') || errMsg.match('406')){
+                            alert('您的登录信息已超时，请稍后重试。');
+                            location.href="/login";
+                            return;
+                        }
                         message.error('添加域名失败，请稍后重试');
                     })
                 }
@@ -186,6 +208,12 @@ export default class AddDomain extends React.Component<{history?:any,location?:a
                     }
                 }).catch((err)=>{
                     console.log('err',err);
+                    let errMsg = err.toString();
+                    if(errMsg.match('401') || errMsg.match('406')){
+                        alert('您的登录信息已超时，请稍后重试。');
+                        location.href="/login";
+                        return;
+                    }
                     message.error('增加IP地址失败，请稍后重试');
                 })
             }else{
@@ -238,6 +266,12 @@ export default class AddDomain extends React.Component<{history?:any,location?:a
                     message.error('删除IP失败，请稍后重试。');
                 }
             }).catch((err)=>{
+                let errMsg = err.toString();
+                if(errMsg.match('401') || errMsg.match('406')){
+                    alert('您的登录信息已超时，请稍后重试。');
+                    location.href="/login";
+                    return;
+                }
                 console.log(err,'删除失败');
                 message.error('删除IP失败，请稍后重试。');
             })

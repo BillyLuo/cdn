@@ -26,6 +26,7 @@
     background: url(/img/icon-protect.png) no-repeat;
     background-size: contain;
     margin-right: 8px;
+    margin-top: -2px;
 }
 /* 操作按钮 */
 .business-btn {

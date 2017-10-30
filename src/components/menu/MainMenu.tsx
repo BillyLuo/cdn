@@ -12,20 +12,20 @@ export default class MainMenu extends React.Component<{prop?:any,onClickMenu?:an
     }
     menuNodes:any = [
         {path:'/cdn/home',title:'首页',icon:'home'},
-        {path:'/cdn/cdn',title:'CDN',icon:'cloud-o',children:[
-            {path:'/cdn/aboutcdn',title:'概况',icon:'tags'},
-            {path:'/cdn/cdndomain',title:'CDN域名',icon:'rocket'},
-            {path:'/cdn/adddomain',title:'添加域名',icon:'plus-circle'},
-            {path:'/cdn/downloadlog',title:'日志下载',icon:'copy'}
-        ]},
+        // {path:'/cdn/cdn',title:'CDN',icon:'cloud-o',children:[
+        //     {path:'/cdn/aboutcdn',title:'概况',icon:'tags'},
+        //     {path:'/cdn/cdndomain',title:'CDN域名',icon:'rocket'},
+        //     {path:'/cdn/adddomain',title:'添加域名',icon:'plus-circle'},
+        //     {path:'/cdn/downloadlog',title:'日志下载',icon:'copy'}
+        // ]},
         {path:'/cdn/hijack',title:'反劫持',icon:'disconnect',children:[
             {path:'/cdn/businessmanagement',title:'业务管理',icon:'appstore-o'},
             {path:'/cdn/operatingdata',title:'运行数据',icon:'database'}
         ]},
         {path:'/cdn/user',title:'用户中心',icon:'user'},        
-        {path:'/cdn/fee',title:'费用中心',icon:'wallet',children:[
-            {path:'/cdn/chain',title:'费用',icon:''}
-        ]}
+        // {path:'/cdn/fee',title:'费用中心',icon:'wallet',children:[
+        //     {path:'/cdn/chain',title:'费用',icon:''}
+        // ]}
     ];
     
     //菜单的展开与收拢
