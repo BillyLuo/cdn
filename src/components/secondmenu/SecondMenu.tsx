@@ -126,7 +126,7 @@ export default class SecondMenu extends React.Component<{prop?:any,onClickSecond
                     <div className={this.state.collapsed?'second-menu-title-close':'second-menu-title'}>
                         {menuTitle}
                     </div>
-                    <Menu className="second-mfdfenu"
+                    <Menu className="second-menu"
                     selectedKeys={[selectedKey]}
                     mode="inline"
                     inlineCollapsed={this.state.collapsed}

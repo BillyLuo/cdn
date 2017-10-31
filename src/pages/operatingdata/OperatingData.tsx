@@ -55,7 +55,7 @@ export default class BusinessManagement extends React.Component<{history?:any},{
             grid: {
                 left: '3%',
                 right: '3%',
-                bottom: '3%',
+                bottom: '5%',
                 // containLabel: true
             },
             toolbox: {
@@ -312,14 +312,16 @@ export default class BusinessManagement extends React.Component<{history?:any},{
                         </li>
                     </ul>
                 </div>
-                <div className="business-header clearfix" style={{padding:'6px 12px',borderRadius:4,marginBottom:40}}>
+                <div className="business-header clearfix" style={{padding:'6px 12px',borderRadius:4}}>
                     <span style={{display:'block',lineHeight:'28px',float:'left'}}>日保护统计</span>
                     <Select style={{float:'right',width:100}} defaultValue="domain" onChange={this.changeType.bind(this)}>
                         <Option value="domain">DNS域名</Option>
                         <Option value="url">URL</Option>
                     </Select>
                 </div>
-                <div id="main" style={{width:'100%',height:400}}></div>
+                <div style={{height:400}}>
+                    <div id="main" style={{width:'100%',height:400}}></div>
+                </div>
                 <div className="business-header">反劫持日志
                     <Popover content='下载日志'>
                         <Icon style={{fontWeight:600,marginLeft:4}} type="download" />
