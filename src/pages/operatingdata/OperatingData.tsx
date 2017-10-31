@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {DatePicker,Select,Table} from 'antd';
+import {DatePicker,Select,Table,Icon,Popover} from 'antd';
 const Option = Select.Option;
 import './operatingdata.css';
 // declare var axios;
@@ -25,7 +25,7 @@ export default class BusinessManagement extends React.Component<{history?:any},{
         // 指定图表的配置项和数据
         let x = (function(){
             let arr = [];
-            for(var i = 1990;i<2100;i++){
+            for(var i = 1900;i<2100;i++){
                 arr.push(i+'年')
             }
             return arr;
@@ -54,9 +54,9 @@ export default class BusinessManagement extends React.Component<{history?:any},{
             },
             grid: {
                 left: '3%',
-                right: '4%',
+                right: '3%',
                 bottom: '3%',
-                containLabel: true
+                // containLabel: true
             },
             toolbox: {
                 feature: {
@@ -113,6 +113,7 @@ export default class BusinessManagement extends React.Component<{history?:any},{
     }
     changeChart(option:any){
         this.myChart.setOption(option);
+        
     }
     componentDidUpdate(){
         let x = (function(){
@@ -198,7 +199,11 @@ export default class BusinessManagement extends React.Component<{history?:any},{
                 }
             ]
         };
+        console.log(option);
         this.changeChart(option);
+        let xx = echarts.getInstanceByDom(document.getElementById('main'));
+        console.log(xx);
+        xx.resize();
     }
     getLog(){
         const columns = [{
@@ -286,7 +291,7 @@ export default class BusinessManagement extends React.Component<{history?:any},{
         return (
             <div className="operating-data">
                 <Title text="运行数据" />
-                <div style={{paddingTop:38}}>
+                <div style={{paddingTop:18}}>
                     <ul className="clearfix business-header">
                         <li><i className="icon-protect"></i>受保护域名：<span>3</span></li>
                         <li>累计保护次数：<span>3</span></li>
@@ -307,16 +312,18 @@ export default class BusinessManagement extends React.Component<{history?:any},{
                         </li>
                     </ul>
                 </div>
-                <div style={{border:'1px solid #ddd',color:'#2b2b2b',background:'#f7f7f7',height:40,padding:'6px 12px',borderRadius:4,marginBottom:40}}>
-                    <span style={{display:'inline-block',padding:'4px 0'}}>日保护统计</span>
+                <div className="business-header clearfix" style={{padding:'6px 12px',borderRadius:4,marginBottom:40}}>
+                    <span style={{display:'block',lineHeight:'28px',float:'left'}}>日保护统计</span>
                     <Select style={{float:'right',width:100}} defaultValue="domain" onChange={this.changeType.bind(this)}>
                         <Option value="domain">DNS域名</Option>
                         <Option value="url">URL</Option>
                     </Select>
                 </div>
-                <div id="main" style={{maxWidth:1200,height:400}}></div>
-                <div style={{margin:'24px 0',border:'1px solid #ddd',color:'#2b2b2b',background:'#f7f7f7',height:40,padding:'6px 12px',borderRadius:4}}>
-                    <p style={{padding:'6px 0'}}>反劫持日志</p>
+                <div id="main" style={{width:'100%',height:400}}></div>
+                <div className="business-header">反劫持日志
+                    <Popover content='下载日志'>
+                        <Icon style={{fontWeight:600,marginLeft:4}} type="download" />
+                    </Popover>
                 </div>
                 {this.getLog()}
             </div>

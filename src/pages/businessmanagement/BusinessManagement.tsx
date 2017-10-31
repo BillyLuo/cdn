@@ -2,9 +2,9 @@ import * as React from 'react';
 import './businessmanagement.css';
 import {Table,Modal,message} from 'antd';
 declare var axios;
-import Title from '../../components/title/Title'
+import Title from '../../components/title/Title';
 export default class BusinessManagement extends React.Component<{history?:any},{}>{
-    constructor(props:any) {
+    constructor(props:any,context) {
         super(props)
     }
     state = {
@@ -336,14 +336,21 @@ export default class BusinessManagement extends React.Component<{history?:any},{
             }
         })
     }
+    goToDetail(){
+        let h = this.props.history;
+        if (h.push){
+            h.push('/cdn/antihijackdetail');
+        }
+    }
     getDomainData (pageNo?:number,pageSize?:number,TotalCount?:number) {
+        let $this = this;
         let domainPageSize = this.state.domainPageSize;
         let domainTotalCount = this.state.domainTotalCount;
         const columns = [{
             title: '域名',
             dataIndex: 'domainName',
             key: 'domainName',
-            render: text => <a href="#">{text}</a>,
+            render: text => <a href="javascript:;" onClick={$this.goToDetail.bind(this)}>{text}</a>,
           }, {
             title: 'DNS解析',
             dataIndex: 'dns',
@@ -382,7 +389,6 @@ export default class BusinessManagement extends React.Component<{history?:any},{
           }];
           let data = this.state.domainData;
           let selectedDomains = this.state.selectedDomains;
-          let $this = this;
           let rowSelection = {
             selectedDomains,
             onSelect:this.onSelectDomain.bind($this),
@@ -409,11 +415,12 @@ export default class BusinessManagement extends React.Component<{history?:any},{
     }
     //渲染urlData
     getUrlData(){
+        let $this = this;
         const columns = [{
             title: 'URL',
             dataIndex: 'urlText',
             key: 'urlText',
-            render: text => <a href="#">{text}</a>,
+            render: text => <a href="javascript:;" onClick={$this.goToDetail.bind(this)}>{text}</a>,
           }, {
             title: 'Hash值',
             dataIndex: 'urlHash',
@@ -450,7 +457,6 @@ export default class BusinessManagement extends React.Component<{history?:any},{
             }
           })
           let selectedUrls = this.state.selectedUrls;
-          let $this = this;
           let rowSelection = {
             selectedUrls,
             onChange: this.onSelectUrlChange.bind($this),
@@ -566,7 +572,7 @@ export default class BusinessManagement extends React.Component<{history?:any},{
         return (
             <div className="business-management" style={{paddingBottom:30}}>
                 <Title text="业务管理" />
-                <div style={{paddingTop:38}}>
+                <div style={{paddingTop:18}}>
                     <ul className="clearfix business-header">
                         <li><i className="icon-protect"></i>受保护域名：<span>{this.state.domainTotalCount}</span></li>
                         <li>累计保护次数：<span>3</span></li>

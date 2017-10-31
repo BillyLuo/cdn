@@ -115,7 +115,7 @@ export default class SecondMenu extends React.Component<{prop?:any,onClickSecond
                 // var openkey = menuNodes[i].path;
                 for(var j = 0;j<childrenNodes.length;j++){
                     if (selectedKey==childrenNodes[j].path){
-                        defaultOpenKeys = menuNodes[i].path;
+                       defaultOpenKeys = menuNodes[i].path;
                     }
                 }
             }
@@ -126,7 +126,7 @@ export default class SecondMenu extends React.Component<{prop?:any,onClickSecond
                     <div className={this.state.collapsed?'second-menu-title-close':'second-menu-title'}>
                         {menuTitle}
                     </div>
-                    <Menu className="second-menu"
+                    <Menu className="second-mfdfenu"
                     selectedKeys={[selectedKey]}
                     mode="inline"
                     inlineCollapsed={this.state.collapsed}

@@ -3,9 +3,13 @@
     margin-bottom: 40px;
 }
 .select-data{
-    padding: 24px 0;
+
 }
 .select-data li {
     width: 240px;
     float: left;
+}
+.anticon-download:hover{
+    transform: scale(1.2);
+    -webkit-transform: scale(1.2);
 }

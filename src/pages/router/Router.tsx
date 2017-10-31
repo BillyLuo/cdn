@@ -12,6 +12,7 @@ import SecurityQuestion from '../safesettings/setsecurity';
 import BusinessManagement from '../businessmanagement/BusinessManagement';
 import OperatingData from '../operatingdata/OperatingData';
 import AddDomain from '../adddomain/AddDomain';
+import Antihijackdetail from '../antihijackdetail/AntihijackDetail';
 // import Chain from './../chain/Chain';
 import {Route,Switch} from 'react-router-dom';
 let router = [
@@ -31,7 +32,8 @@ let router = [
     {path:'/cdn/setsecurity',exact:false,component:SecurityQuestion},
     {path:'/cdn/businessmanagement',exact:false,component:BusinessManagement},
     {path:'/cdn/operatingdata',exact:false,component:OperatingData},
-    {path:'/cdn/adddomain',exact:false,component:AddDomain}
+    {path:'/cdn/adddomain',exact:false,component:AddDomain},
+    {path:'/cdn/antihijackdetail',exact:false,component:Antihijackdetail}
 ]
 export default class MainRouter extends React.Component<{},{}>{
     constructor(props:any){
