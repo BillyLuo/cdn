@@ -1,5 +1,4 @@
 import * as React from 'react';
-// import '../menu.less';
 
 import {Menu,Icon,Button } from 'antd';
 const SubMenu = Menu.SubMenu;

@@ -1,6 +1,6 @@
 {
   "presets": ["react-app"],
-  "plugins": [["import", { "libraryName": "antd", "style": false }],["transform-runtime",{
+  "plugins": [["import", { "libraryName": "antd", "style": true }],["transform-runtime",{
     "helpers": false,
     "polyfill": true,
     "regenerator": true,

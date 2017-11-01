@@ -1,5 +1,6 @@
 const { injectBabelPlugin } = require('react-app-rewired');
 module.exports = function override(config, env) {
+  config = injectBabelPlugin(["import", { "libraryName": "antd", "style": "css" }], config)
   const tsLoader = config.module.rules.find(conf => {
     return conf.loader && conf.loader.includes('ts-loader')
   })
@@ -21,7 +22,6 @@ module.exports = function override(config, env) {
   const path = require('path')
   // For import with absolute path
   config.resolve.modules = [path.resolve('src')].concat(config.resolve.modules)
-  config = injectBabelPlugin(['import', { libraryName: 'antd', style: 'css' }], config)
 
   return config
 }

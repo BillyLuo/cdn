@@ -46,6 +46,12 @@ export default class Certification extends React.Component<{history?:any},{}>{
             $this.setState({
                 spinning:false
             })
+            let errMsg = err.toString();
+            if (errMsg.match('401')||errMsg.match('406')){
+                alert('您的登录信息已超时，请重新登录。');
+                $this.props.history.push('/login');
+                return;
+            }
             message.error('获取认证信息错误，请稍后重试。');
         })
     }
@@ -77,6 +83,12 @@ export default class Certification extends React.Component<{history?:any},{}>{
             $this.setState({
                 spinning:false
             })
+            let errMsg = err.toString();
+            if (errMsg.match('401')||errMsg.match('406')){
+                alert('您的登录信息已超时，请重新登录。');
+                $this.props.history.push('/login');
+                return;
+            }
             message.error('获取认证信息错误，请稍后重试。');
         })
     }

@@ -11,6 +11,10 @@ export default class BusinessManagement extends React.Component<{history?:any},{
     }
     componentDidMount(){
         this.initChart();
+        let $this = this;
+        window.onresize  = function () {
+            $this.changeChart();
+        }
     }
     state = {
         chartTitle:'日保护统计',
@@ -60,7 +64,9 @@ export default class BusinessManagement extends React.Component<{history?:any},{
             },
             toolbox: {
                 feature: {
-                    saveAsImage: {}
+                    saveAsImage: {
+                        show:false
+                    }
                 }
             },
             xAxis: {
@@ -111,11 +117,7 @@ export default class BusinessManagement extends React.Component<{history?:any},{
         // 使用刚指定的配置项和数据显示图表。
         this.myChart.setOption(option);
     }
-    changeChart(option:any){
-        this.myChart.setOption(option);
-        
-    }
-    componentDidUpdate(){
+    changeChart(){
         let x = (function(){
             let arr = [];
             for(var i = 1990;i<2100;i++){
@@ -153,7 +155,9 @@ export default class BusinessManagement extends React.Component<{history?:any},{
             },
             toolbox: {
                 feature: {
-                    saveAsImage: {}
+                    saveAsImage: {
+                        show:false
+                    }
                 }
             },
             xAxis: {
@@ -200,10 +204,15 @@ export default class BusinessManagement extends React.Component<{history?:any},{
             ]
         };
         console.log(option);
-        this.changeChart(option);
+        this.myChart.setOption(option);
         let xx = echarts.getInstanceByDom(document.getElementById('main'));
         console.log(xx);
         xx.resize();
+        
+    }
+    componentDidUpdate(){
+        
+        this.changeChart();
     }
     getLog(){
         const columns = [{

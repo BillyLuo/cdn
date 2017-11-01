@@ -164,6 +164,13 @@ export default class AddDomain extends React.Component<{history?:any,location?:a
             message.warn('请填写合格的IP地址。');
             return;
         }
+        let ipData = this.state.ips;
+        for(var i = 0;i<ipData.length;i++){
+            if (value == ipData[i].ipAddress){
+                message.warn('您已添加过该IP，请重新输入');
+                return;
+            }
+        }
         //如果是有domainid的话
         if (this.state.domainId){
             let data = {ipAddress:value}

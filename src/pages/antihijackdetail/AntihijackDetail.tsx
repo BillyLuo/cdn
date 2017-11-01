@@ -58,7 +58,9 @@ export default class AntiHijackDetail extends React.Component<{},any>{
             },
             toolbox: {
                 feature: {
-                    saveAsImage: {}
+                    saveAsImage: {
+                        show:false//不显示下载图片按钮
+                    }
                 }
             },
             xAxis: {
@@ -107,12 +109,14 @@ export default class AntiHijackDetail extends React.Component<{},any>{
         this.changeProtectChart(option);
         this.changeVisitChart(option);
     }
+    //更新日保护chart
     changeProtectChart(option){
         this.protectChart.setOption(option);
         let protects = document.getElementById('protects');
         let chartDom = echarts.getInstanceByDom(protects);
         chartDom.resize();
     }
+    //更新日访问chart
     changeVisitChart(option){
         this.visitChart.setOption(option);
         let visits = document.getElementById('visits');
@@ -157,7 +161,9 @@ export default class AntiHijackDetail extends React.Component<{},any>{
             },
             toolbox: {
                 feature: {
-                    saveAsImage: {}
+                    saveAsImage: {
+                        show:false
+                    }
                 }
             },
             xAxis: {

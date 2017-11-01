@@ -76,6 +76,12 @@ export default class BaseInfo extends React.Component<{},{}>{
             $this.setState({
                 loading:false
             })
+            let errMsg = err.toString();
+            if (errMsg.match('401') || errMsg.match('406')){
+                alert('您的登录信息已超时，请重新登录。');
+                $this.props['history'].push('/login');
+                return;
+            }
             message.warning('信息获取出错，请稍后重试');
         })
         
@@ -168,8 +174,8 @@ export default class BaseInfo extends React.Component<{},{}>{
             })
             if (res.status == 401 || res.status == 406) {
                 alert('您的登录信息已超时，请重新登录');
-                if (this.props['history']) {
-                    this.props['history'].push('/login');
+                if ($this.props['history']) {
+                    $this.props['history'].push('/login');
                 }
                 return;
             }
@@ -185,6 +191,13 @@ export default class BaseInfo extends React.Component<{},{}>{
             $this.setState({
                 loading:false
             })
+            let msgErr = err.toString();
+            let errReg = /(401)|(406)/g;
+            if (errReg.test(msgErr)) {
+                alert('您的登录信息已超时，请重新登录');
+                $this.props['history'].push('/login');
+                return;
+            }
             message.error('信息提交失败，请稍后重试');
         })
     }

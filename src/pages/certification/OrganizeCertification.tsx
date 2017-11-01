@@ -69,6 +69,7 @@ export default class OrganizeCertification extends React.Component<{},{}>{
             $this.setState({
                 spinning:false
             })
+            
             console.log('获取认证信息错误',err);
             message.error('获取认证信息错误，请稍后重试。');
         })

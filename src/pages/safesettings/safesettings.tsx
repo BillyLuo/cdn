@@ -5,7 +5,7 @@ import {message} from 'antd';
 import './css/safesettings.css';
 declare var axios;
 
-export default class SafeSettings extends React.Component<{},{}>{
+export default class SafeSettings extends React.Component<{history:any},{}>{
     constructor(props:any){
         super(props);
     }
@@ -45,9 +45,16 @@ export default class SafeSettings extends React.Component<{},{}>{
                 }
             }
         }).catch(function (err) {
+            let errMsg = err.toString();
+            if (errMsg.match('401')||errMsg.match('406')){
+                alert('您的登录信息已超时，请重新登录。');
+                $this.props.history.push('/login');
+                return;
+            }
         })
     }
     getCertificationInfo() {
+        let $this = this;
         const userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
         let userId;
         if (userinfo && userinfo.userId){
@@ -66,6 +73,12 @@ export default class SafeSettings extends React.Component<{},{}>{
                 }
             }
         }).catch((err) => {
+            let errMsg = err.toString();
+            if (errMsg.match('401')||errMsg.match('406')){
+                alert('您的登录信息已超时，请重新登录。');
+                this.props.history.push('/login');
+                return;
+            }
         });
 
         axios.get('/bizrest/bcbizcertifcationorganize/?query=' + JSON.stringify(query)).then((res) => {
@@ -78,6 +91,12 @@ export default class SafeSettings extends React.Component<{},{}>{
             }
         }).catch((err) => {
             message.warn('网络故障，请稍后重试。');
+            let errMsg = err.toString();
+            if (errMsg.match('401')||errMsg.match('406')){
+                alert('您的登录信息已超时，请重新登录。');
+                $this.props.history.push('/login');
+                return;
+            }
         })
     }
     modify(path?:string){

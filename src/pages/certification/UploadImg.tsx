@@ -105,9 +105,15 @@ export default class UploadImg extends React.Component<{
                     }
                 }
             },
-            onError:() => {
+            onError:(err) => {
                 // that['msg'].MDComponent.show({message:'证件上传失败，请稍后重试'})
                 message.error('证件上传错误，请稍后重试');
+                let errMsg = err.toString();
+                if (errMsg.match('401')||errMsg.match('406')){
+                    alert('您的登录信息已超时，请重新登录。');
+                    location.assign('/login');
+                    return;
+                }
             },
             fileList: this.state.fileList
         };
